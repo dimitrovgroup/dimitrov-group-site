@@ -26,7 +26,7 @@ const d = member.data;
         <h3>{d.name}</h3>
         {d.external && <span class="badge">Collaborator</span>}
       </div>
-      <p class="eyebrow">{d.role}</p>
+      {!d.external && <p class="eyebrow">{d.role}</p>}
       {d.shortBio && <p class="muted member-card-bio">{d.shortBio}</p>}
     </div>
   </div>
