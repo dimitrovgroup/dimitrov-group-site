@@ -1,0 +1,125 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Base from '~/layouts/Base.astro';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects', ({ data }) => !data.draft);
+  return projects.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+type Props = { project: CollectionEntry<'projects'> };
+const { project } = Astro.props;
+const d = project.data;
+const { Content } = await project.render();
+
+const yearRange = d.endYear ? `${d.startYear}–${d.endYear}` : `${d.startYear}–present`;
+const statusClass = `badge-${d.status.toLowerCase()}`;
+
+// Resolve lead member display name, if any.
+let leadName: string | null = null;
+if (d.leadMember) {
+  const members = await getCollection('members');
+  const lead = members.find((m) => m.slug === d.leadMember);
+  if (lead) leadName = lead.data.name;
+}
+
+// PI display name (only if explicitly set and resolves).
+let piName: string | null = null;
+if (d.principalInvestigator) {
+  const members = await getCollection('members');
+  const pi = members.find((m) => m.slug === d.principalInvestigator);
+  if (pi) piName = pi.data.name;
+}
+
+const registryUrl = d.registry
+  ? d.registry.name === 'ClinicalTrials.gov'
+    ? `https://clinicaltrials.gov/study/${d.registry.id}`
+    : `https://www.google.com/search?q=${encodeURIComponent(`${d.registry.name} ${d.registry.id}`)}`
+  : null;
+---
+
+<Base title={d.title} description={d.summary}>
+  <section>
+    <div class="container container-narrow">
+      <header class="project-head section-header">
+        <p class="eyebrow">Project</p>
+        <div class="project-status-row">
+          <span class={`badge ${statusClass}`}>{d.status}</span>
+          <span class="subtle">{yearRange}</span>
+          {d.type && <span class="subtle">· {d.type}</span>}
+        </div>
+        <h1>{d.title}</h1>
+        <p class="lede">{d.summary}</p>
+      </header>
+
+      <article class="project-body prose">
+        <Content />
+      </article>
+
+      <dl class="project-meta">
+        {piName && (
+          <>
+            <dt>Principal Investigator</dt>
+            <dd>{piName}</dd>
+          </>
+        )}
+        {leadName && (
+          <>
+            <dt>Lead</dt>
+            <dd>{leadName}</dd>
+          </>
+        )}
+        {d.ethicsApproval && (
+          <>
+            <dt>Ethics approval</dt>
+            <dd class="mono">{d.ethicsApproval}</dd>
+          </>
+        )}
+        {d.registry && registryUrl && (
+          <>
+            <dt>Registry</dt>
+            <dd>
+              <a class="text-link" href={registryUrl} target="_blank" rel="noopener">
+                {d.registry.name}: {d.registry.id} <span aria-hidden="true">&#8599;</span>
+              </a>
+            </dd>
+          </>
+        )}
+      </dl>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .project-status-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-3);
+    margin-block: var(--space-2);
+  }
+  .project-body { margin-top: var(--space-5); font-size: var(--fs-body); line-height: 1.7; }
+  .project-body :global(p) { margin: 0 0 1em; }
+  .project-meta {
+    margin-top: var(--space-6);
+    padding-top: var(--space-5);
+    border-top: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    gap: var(--space-3) var(--space-5);
+    font-size: var(--fs-small);
+  }
+  .project-meta dt {
+    color: var(--text-subtle);
+    text-transform: uppercase;
+    font-size: var(--fs-micro);
+    letter-spacing: 0.08em;
+    font-weight: 600;
+    align-self: center;
+  }
+  .project-meta dd { margin: 0; }
+  .mono { font-family: var(--font-mono); color: var(--text-muted); }
+</style>

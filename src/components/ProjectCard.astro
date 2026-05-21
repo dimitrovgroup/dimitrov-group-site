@@ -1,5 +1,5 @@
 ---
-import type { CollectionEntry } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 
 type Props = { project: CollectionEntry<'projects'> };
 const { project } = Astro.props;
@@ -7,15 +7,27 @@ const d = project.data;
 
 const yearRange = d.endYear ? `${d.startYear}–${d.endYear}` : `${d.startYear}–present`;
 const statusClass = `badge-${d.status.toLowerCase()}`;
+
+// Resolve the lead member's display name (if a leadMember slug is set).
+let leadName: string | null = null;
+if (d.leadMember) {
+  const members = await getCollection('members');
+  const lead = members.find((m) => m.slug === d.leadMember);
+  if (lead) leadName = lead.data.name;
+}
 ---
 
-<article class="card card-hover project-card">
+<article class="card project-card">
   <div class="project-head">
     <span class={`badge ${statusClass}`}>{d.status}</span>
     <span class="subtle project-years">{yearRange}</span>
   </div>
   <h3 class="project-title">{d.title}</h3>
   <p class="muted project-summary">{d.summary}</p>
+
+  {leadName && (
+    <p class="project-lead subtle">Lead: {leadName}</p>
+  )}
 
   {(d.ethicsApproval || d.registry) && (
     <footer class="project-foot row">
@@ -54,6 +66,10 @@ const statusClass = `badge-${d.status.toLowerCase()}`;
   .project-years { font-size: var(--fs-micro); }
   .project-title { margin: 0; }
   .project-summary { margin: 0; font-size: var(--fs-small); }
+  .project-lead {
+    margin: 0;
+    font-size: var(--fs-micro);
+  }
   .project-foot {
     margin-top: auto;
     padding-top: var(--space-3);
