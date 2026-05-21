@@ -3,6 +3,7 @@ name: "Nikolay Cherkezov, MD"
 role: "Assistant Professor & PhD Student"
 order: 5
 affiliation: "Department of Orthopaedics, Medical University of Sofia · USBALO \"Prof. Boycho Boychev\", Sofia, Bulgaria"
+pubmedName: "Cherkezov N"
 shortBio: "Assistant professor at the Medical University of Sofia and a doctoral candidate at USBALO \"Boycho Boychev\". Oversees publication methodology — systematic reviews and meta-analyses."
 interests: []
 collaborators: []

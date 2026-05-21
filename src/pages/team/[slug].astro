@@ -6,6 +6,7 @@ import PublicationItem from '~/components/PublicationItem.astro';
 import ActivityItem from '~/components/ActivityItem.astro';
 import ProjectCard from '~/components/ProjectCard.astro';
 import { getPublications } from '~/utils/publications.ts';
+import { getMemberPubmedNames } from '~/utils/members.ts';
 
 export async function getStaticPaths() {
   const members = await getCollection('members', ({ data }) => !data.draft);
@@ -23,16 +24,9 @@ const { Content } = await member.render();
 // Related publications.
 const pubs = getPublications().filter((p) => p.members.includes(member.slug));
 
-// Build member last-name map for author highlighting.
+// PubMed-name map for highlighting member authors in citation lines.
+const memberPubmedNames = await getMemberPubmedNames();
 const allMembers = await getCollection('members');
-const memberLastNames: Record<string, string> = {};
-for (const m of allMembers) {
-  const stripped = m.data.name
-    .replace(/\b(Prof|Dr|PhD|MD|Mr|Mrs|Ms)\.?/gi, '')
-    .trim();
-  const last = stripped.split(/\s+/).filter(Boolean).pop() ?? '';
-  memberLastNames[m.slug] = last;
-}
 
 // Congress presentations where this member is the presenter.
 const allActivities = await getCollection('activities', ({ data }) => !data.draft);
@@ -92,8 +86,8 @@ const description = d.shortBio ?? `${d.name}, ${d.role}, Orthopaedic Research Gr
             {pubs.map((p) => (
               <PublicationItem
                 pub={p}
+                memberPubmedNames={memberPubmedNames}
                 highlightMember={member.slug}
-                memberLastNames={memberLastNames}
               />
             ))}
           </div>

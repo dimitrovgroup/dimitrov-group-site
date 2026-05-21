@@ -4,6 +4,7 @@ role: "Member"
 order: 100
 external: true
 affiliation: "Department of Consultation-Liaison Psychiatry, Universitätsspital Zürich (USZ), Switzerland"
+pubmedName: "Enev G"
 shortBio: "Doctor in the Department of Consultation-Liaison Psychiatry at Universitätsspital Zürich. Investigates translational aspects of psychiatric morbidity and musculoskeletal disease."
 interests:
   - "Consultation-liaison psychiatry"

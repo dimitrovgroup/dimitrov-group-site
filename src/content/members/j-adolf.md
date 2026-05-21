@@ -4,6 +4,7 @@ role: "Group Member"
 order: 20
 email: "adolf@hin.ch"
 affiliation: "Department of Orthopaedics, Medical University of Sofia · USBALO \"Boycho Boychev\", Sofia, Bulgaria"
+pubmedName: "Adolf J"
 shortBio: "Clinical fellow in orthopaedics and traumatology at the Medical University of Sofia and USBALO \"Boycho Boychev\"."
 interests:
   - "Orthopaedic outcomes"

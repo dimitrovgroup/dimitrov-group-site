@@ -2,8 +2,10 @@
 import Base from '~/layouts/Base.astro';
 import PublicationItem from '~/components/PublicationItem.astro';
 import { getPublications } from '~/utils/publications.ts';
+import { getMemberPubmedNames } from '~/utils/members.ts';
 
 const pubs = getPublications();
+const memberPubmedNames = await getMemberPubmedNames();
 
 // Group by year, descending. Within a year, preserve the sort coming from
 // getPublications() (year desc, then PMID desc).
@@ -30,7 +32,7 @@ const yearGroups = [...byYear.entries()].sort(([a], [b]) => b - a);
           <section class="pub-year" aria-labelledby={`y-${year}`}>
             <h2 id={`y-${year}`} class="pub-year-head">{year}</h2>
             <div class="stack pub-year-list">
-              {items.map((p) => <PublicationItem pub={p} />)}
+              {items.map((p) => <PublicationItem pub={p} memberPubmedNames={memberPubmedNames} />)}
             </div>
           </section>
         ))}

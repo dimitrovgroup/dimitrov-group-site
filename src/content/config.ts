@@ -31,6 +31,7 @@ const members = defineCollection({
       email: z.string().email().optional(),
       orcid: z.string().regex(/^\d{4}-\d{4}-\d{4}-\d{3}[0-9X]$/).optional(),
       affiliation: z.string().optional(),
+      pubmedName: z.string().optional(), // PubMed-style "Lastname I" used for author matching in citations
       interests: z.array(z.string()).default([]),
       collaborators: z.array(z.string()).default([]), // slugs of collaborators
       external: z.boolean().default(false), // true for collaborators (Georgi Enev)

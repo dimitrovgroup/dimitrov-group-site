@@ -3,6 +3,7 @@ name: "Professor N. Dimitrov, MD, PhD"
 role: "Principal Investigator"
 order: 1
 affiliation: "Department of Orthopaedics and Traumatology, Medical University of Sofia · USBALO \"Prof. Boycho Boychev\", Sofia, Bulgaria"
+pubmedName: "Dimitrov N"
 shortBio: "Principal investigator. Senior orthopaedic surgeon at USBALO \"Prof. Boycho Boychev\", Sofia, and faculty member at the Medical University of Sofia."
 interests:
   - "Shoulder and elbow surgery"

@@ -4,29 +4,48 @@ import { pubmedUrl, doiUrl } from '~/utils/links.ts';
 
 type Props = {
   pub: Publication;
-  /** A member slug whose author entry should be visually emphasised. */
+  /** Map of member slug → PubMed-style name (e.g. "Dimitrov N"). Used to bold any
+   *  author who is a member of the group. */
+  memberPubmedNames?: Record<string, string>;
+  /** A member slug whose author entry should be visually emphasised (teal + bold).
+   *  Used on per-member profile pages to highlight "you". */
   highlightMember?: string;
-  /** Optional map of member slug -> last name (e.g. "Dimitrov") for highlighting. */
-  memberLastNames?: Record<string, string>;
 };
 
-const { pub, highlightMember, memberLastNames = {} } = Astro.props;
+const { pub, memberPubmedNames = {}, highlightMember } = Astro.props;
 
 const pm = pub.pmid ? pubmedUrl(pub.pmid) : '';
 const di = pub.doi  ? doiUrl(pub.doi)    : '';
 
-// Pre-render data-search-text for SearchBox filtering.
+// Pre-render data-search-text for filtering.
 const searchText = `${pub.title} ${pub.authors.join(' ')} ${pub.journal} ${pub.year}`.toLowerCase();
 const dataMembers = pub.members.join(',');
 
-const highlightName =
-  highlightMember && memberLastNames[highlightMember]
-    ? memberLastNames[highlightMember].toLowerCase()
+const highlightPattern =
+  highlightMember && memberPubmedNames[highlightMember]
+    ? memberPubmedNames[highlightMember]
     : null;
 
-function authorIsHighlighted(author: string): boolean {
-  if (!highlightName) return false;
-  return author.toLowerCase().includes(highlightName);
+/** True iff `author` matches `pattern` as a PubMed-style name, allowing for
+ *  trailing additional initials (so "Adolf J" matches both "Adolf J" and "Adolf JA"). */
+function matches(author: string, pattern: string): boolean {
+  if (author === pattern) return true;
+  if (author.startsWith(pattern)) {
+    const next = author[pattern.length];
+    return next === undefined || /[A-Z]/.test(next);
+  }
+  return false;
+}
+
+function authorIsMember(author: string): boolean {
+  for (const pattern of Object.values(memberPubmedNames)) {
+    if (matches(author, pattern)) return true;
+  }
+  return false;
+}
+
+function authorIsHighlight(author: string): boolean {
+  return highlightPattern ? matches(author, highlightPattern) : false;
 }
 ---
 
@@ -48,12 +67,17 @@ function authorIsHighlighted(author: string): boolean {
   )}
 
   <p class="pub-authors">
-    {pub.authors.map((a, i) => (
-      <>
-        <span class={authorIsHighlighted(a) ? 'pub-author is-me' : 'pub-author'}>{a}</span>
-        {i < pub.authors.length - 1 && <span class="pub-sep">, </span>}
-      </>
-    ))}
+    {pub.authors.map((a, i) => {
+      const isMe = authorIsHighlight(a);
+      const isMember = authorIsMember(a);
+      const cls = isMe ? 'pub-author is-me' : isMember ? 'pub-author is-member' : 'pub-author';
+      return (
+        <>
+          <span class={cls}>{a}</span>
+          {i < pub.authors.length - 1 && <span class="pub-sep">, </span>}
+        </>
+      );
+    })}
   </p>
 
   <p class="pub-meta subtle">
@@ -113,6 +137,10 @@ function authorIsHighlighted(author: string): boolean {
     font-size: var(--fs-small);
     color: var(--text-muted);
     line-height: 1.5;
+  }
+  .pub-author.is-member {
+    color: var(--text);
+    font-weight: 600;
   }
   .pub-author.is-me {
     color: var(--accent-ink);
