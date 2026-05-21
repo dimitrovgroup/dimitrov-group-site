@@ -19,6 +19,7 @@ const d = member.data;
       src={d.portrait}
       srcWebp={d.portraitWebp}
       size={variant === 'spotlight' ? 128 : 96}
+      transitionName={`avatar-${member.slug}`}
     />
     <div class="member-card-body">
       <div class="member-card-head">

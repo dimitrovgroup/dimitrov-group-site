@@ -22,7 +22,7 @@ if (d.leadMember) {
     <span class={`badge ${statusClass}`}>{d.status}</span>
     <span class="subtle project-years">{yearRange}</span>
   </div>
-  <h3 class="project-title">{d.title}</h3>
+  <h3 class="project-title" transition:name={`project-${project.slug}`}>{d.title}</h3>
   <p class="muted project-summary">{d.summary}</p>
 
   {leadName && (

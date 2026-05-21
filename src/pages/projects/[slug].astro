@@ -51,7 +51,7 @@ const registryUrl = d.registry
           <span class="subtle">{yearRange}</span>
           {d.type && <span class="subtle">· {d.type}</span>}
         </div>
-        <h1>{d.title}</h1>
+        <h1 transition:name={`project-${project.slug}`}>{d.title}</h1>
         <p class="lede">{d.summary}</p>
       </header>
 

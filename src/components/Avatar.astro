@@ -6,9 +6,10 @@ type Props = {
   srcWebp?: string; // WebP path under /public, e.g. "/team/n-dimitrov.webp"
   size?: number;
   eager?: boolean;  // set true for above-the-fold avatars; otherwise lazy
+  transitionName?: string; // for Astro View Transitions (morphing avatar between pages)
 };
 
-const { name, initials: explicitInitials, src, srcWebp, size = 96, eager = false } = Astro.props;
+const { name, initials: explicitInitials, src, srcWebp, size = 96, eager = false, transitionName } = Astro.props;
 
 /**
  * Robust fallback monogram. Strips honorifics ("Professor"/"Prof", "Dr"/"Doctor",
@@ -36,7 +37,11 @@ const fontPx = `${Math.round(size * 0.36)}px`;
 const loading = eager ? 'eager' : 'lazy';
 ---
 
-<div class="avatar" style={`--avatar-size: ${sizePx}; --avatar-font: ${fontPx};`}>
+<div
+  class="avatar"
+  style={`--avatar-size: ${sizePx}; --avatar-font: ${fontPx};`}
+  {...(transitionName ? { 'transition:name': transitionName } : {})}
+>
   {src ? (
     <picture>
       {srcWebp && <source srcset={srcWebp} type="image/webp" />}

@@ -59,6 +59,7 @@ const description = d.shortBio ?? `${d.name}, ${d.role}, Orthopaedic Research Gr
           srcWebp={d.portraitWebp}
           size={192}
           eager
+          transitionName={`avatar-${member.slug}`}
         />
         <div class="member-head-text">
           <p class="eyebrow">{d.role}{d.external && ' · External collaborator'}</p>
