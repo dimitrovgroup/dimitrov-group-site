@@ -16,6 +16,7 @@ const members = (await getCollection('members', ({ data }) => !data.draft))
   .sort((a, b) => a.data.order - b.data.order);
 const pi = members.find((m) => m.slug === 'n-dimitrov');
 const others = members.filter((m) => m.slug !== 'n-dimitrov');
+const PiContent = pi ? (await pi.render()).Content : null;
 
 // Recent publications.
 const pubs = getPublications().slice(0, 5);
@@ -90,9 +91,48 @@ const description =
     </Section>
   </Reveal>
 
+  {pi && PiContent && (
+    <Reveal>
+      <section id="pi" class="pi-spotlight">
+        <div class="container">
+          <div class="pi-grid">
+            <figure class="pi-portrait">
+              <picture>
+                {pi.data.portraitWebp && <source srcset={pi.data.portraitWebp} type="image/webp" />}
+                {pi.data.portrait && (
+                  <img
+                    src={pi.data.portrait}
+                    alt={`Portrait of ${pi.data.name}`}
+                    width="720"
+                    height="900"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                )}
+              </picture>
+            </figure>
+            <div class="pi-body">
+              <p class="eyebrow">Principal Investigator</p>
+              <h2 class="pi-name">{pi.data.name}</h2>
+              <div class="pi-bio prose">
+                <PiContent />
+              </div>
+              {pi.data.interests.length > 0 && (
+                <div class="pi-tags row">
+                  {pi.data.interests.map((tag) => (
+                    <span class="pi-tag">{tag}</span>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+    </Reveal>
+  )}
+
   <Reveal>
     <Section id="team" eyebrow="Team" title="The people." lede="A focused group, with external collaborators where they bring expertise.">
-      {pi && <div class="spotlight"><MemberCard member={pi} variant="spotlight" /></div>}
       <div class="grid grid-3 team-grid">
         {others.map((m) => <MemberCard member={m} />)}
       </div>
@@ -168,8 +208,78 @@ const description =
 
 <style>
   .about-body { max-width: 65ch; }
-  .spotlight { margin-bottom: var(--space-5); }
   .team-grid { margin-top: var(--space-5); }
+
+  /* PI spotlight section */
+  .pi-spotlight {
+    padding-block: var(--space-7);
+  }
+  @media (min-width: 768px) {
+    .pi-spotlight { padding-block: var(--space-8); }
+  }
+  .pi-grid {
+    display: grid;
+    gap: var(--space-5);
+    grid-template-columns: 1fr;
+    align-items: center;
+  }
+  @media (min-width: 1024px) {
+    .pi-grid {
+      grid-template-columns: minmax(280px, 360px) 1fr;
+      gap: var(--space-7);
+    }
+  }
+  .pi-portrait {
+    margin: 0;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    background: var(--surface);
+    box-shadow: var(--shadow-md);
+  }
+  .pi-portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .pi-body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+  .pi-name {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+    font-weight: 600;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+    margin: 0;
+  }
+  .pi-bio {
+    margin: var(--space-2) 0 0;
+    font-size: var(--fs-body);
+    line-height: 1.6;
+    color: var(--text-muted);
+    max-width: 60ch;
+  }
+  .pi-bio :global(p) { margin: 0 0 0.9em; }
+  .pi-bio :global(p:last-child) { margin-bottom: 0; }
+  .pi-tags {
+    margin-top: var(--space-3);
+    gap: var(--space-2);
+  }
+  .pi-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    border-radius: var(--radius-pill);
+    background: var(--accent-soft);
+    color: var(--accent-ink);
+    font-size: var(--fs-micro);
+    font-weight: 500;
+    letter-spacing: -0.005em;
+  }
+
   .team-cta { margin-top: var(--space-5); }
   .pubs-list { gap: var(--space-2); }
 
