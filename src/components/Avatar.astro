@@ -1,27 +1,23 @@
 ---
-import { Image } from 'astro:assets';
-import type { ImageMetadata } from 'astro';
-
 type Props = {
   name: string;
   initials?: string;
-  src?: ImageMetadata | string;
+  src?: string;     // JPG path under /public, e.g. "/team/n-dimitrov.jpg"
+  srcWebp?: string; // WebP path under /public, e.g. "/team/n-dimitrov.webp"
   size?: number;
+  eager?: boolean;  // set true for above-the-fold avatars; otherwise lazy
 };
 
-const { name, initials: explicitInitials, src, size = 96 } = Astro.props;
+const { name, initials: explicitInitials, src, srcWebp, size = 96, eager = false } = Astro.props;
 
 /**
- * Robust fallback. Strips honorifics ("Professor"/"Prof", "Dr"/"Doctor",
+ * Robust fallback monogram. Strips honorifics ("Professor"/"Prof", "Dr"/"Doctor",
  * "PhD", "MD", "Mr/Mrs/Ms") with optional trailing dot, then strips
  * punctuation, then takes the first letter of the first surviving token
- * and the first letter of the last surviving token (ignoring lone-initial
- * tokens like "N." when computing the last token).
+ * and the first letter of the last surviving token.
  */
 function deriveInitials(n: string): string {
-  // Strip honorifics and degrees.
   const stripped = n.replace(/\b(Professor|Prof|Doctor|Dr|PhD|MD|Mr|Mrs|Ms)\.?/gi, '');
-  // Strip commas/semicolons, collapse whitespace.
   const clean = stripped.replace(/[,;]+/g, ' ').replace(/\s+/g, ' ').trim();
   const parts = clean.split(/\s+/).filter(Boolean);
   if (parts.length === 0) return '?';
@@ -37,17 +33,29 @@ function deriveInitials(n: string): string {
 const mono = (explicitInitials ?? '').trim() || deriveInitials(name);
 const sizePx = `${size}px`;
 const fontPx = `${Math.round(size * 0.36)}px`;
+const loading = eager ? 'eager' : 'lazy';
 ---
 
 <div class="avatar" style={`--avatar-size: ${sizePx}; --avatar-font: ${fontPx};`}>
-  {src && typeof src !== 'string' ? (
-    <Image src={src} alt={`Portrait of ${name}`} width={size * 2} height={size * 2} class="avatar-img" />
-  ) : src && typeof src === 'string' ? (
-    <img src={src} alt={`Portrait of ${name}`} class="avatar-img" width={size} height={size} loading="lazy" />
+  {src ? (
+    <picture>
+      {srcWebp && <source srcset={srcWebp} type="image/webp" />}
+      <img
+        src={src}
+        alt={`Portrait of ${name}`}
+        width={size}
+        height={size}
+        loading={loading}
+        decoding="async"
+        class="avatar-img"
+      />
+    </picture>
   ) : (
-    <span class="avatar-mono" aria-hidden="true">{mono}</span>
+    <>
+      <span class="avatar-mono" aria-hidden="true">{mono}</span>
+      <span class="visually-hidden">{name}</span>
+    </>
   )}
-  {!src && <span class="visually-hidden">{name}</span>}
 </div>
 
 <style>
@@ -64,9 +72,11 @@ const fontPx = `${Math.round(size * 0.36)}px`;
     box-shadow: var(--shadow-sm);
     flex-shrink: 0;
   }
+  .avatar picture { display: block; width: 100%; height: 100%; }
   .avatar-img {
     width: 100%; height: 100%;
     object-fit: cover;
+    object-position: center top; /* faces tend to sit in the top-center of 4:5 portraits */
   }
   .avatar-mono {
     color: var(--accent-ink);

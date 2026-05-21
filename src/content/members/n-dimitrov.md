@@ -5,6 +5,8 @@ order: 1
 affiliation: "Clinic of Bone Pathology and General Orthopaedics, USBALO \"Prof. Boycho Boychev\" · Department of Orthopaedics and Traumatology, Medical University of Sofia"
 pubmedName: "Dimitrov N"
 initials: "ND"
+portrait: "/team/n-dimitrov.jpg"
+portraitWebp: "/team/n-dimitrov.webp"
 shortBio: "Head of the Clinic of Bone Pathology and General Orthopaedics at USBALO \"Prof. Boycho Boychev\", Sofia. Lecturer at the Medical University of Sofia."
 interests:
   - "Shoulder surgery"

@@ -13,7 +13,13 @@ const d = member.data;
 
 <article class={`card member-card ${variant === 'spotlight' ? 'is-spotlight' : ''}`}>
   <div class="member-card-inner">
-    <Avatar name={d.name} initials={d.initials} src={d.portrait} size={variant === 'spotlight' ? 128 : 96} />
+    <Avatar
+      name={d.name}
+      initials={d.initials}
+      src={d.portrait}
+      srcWebp={d.portraitWebp}
+      size={variant === 'spotlight' ? 128 : 96}
+    />
     <div class="member-card-body">
       <div class="member-card-head">
         <h3>{d.name}</h3>

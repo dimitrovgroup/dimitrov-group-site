@@ -27,7 +27,8 @@ const members = defineCollection({
       // Optional
       title: z.string().optional(), // e.g. "Prof. Dr. med."
       shortBio: z.string().max(280).optional(),
-      portrait: image().optional(),
+      portrait: z.string().optional(),     // path to JPG under /public/team/<slug>.jpg
+      portraitWebp: z.string().optional(), // path to WebP under /public/team/<slug>.webp
       email: z.string().email().optional(),
       orcid: z.string().regex(/^\d{4}-\d{4}-\d{4}-\d{3}[0-9X]$/).optional(),
       affiliation: z.string().optional(),
