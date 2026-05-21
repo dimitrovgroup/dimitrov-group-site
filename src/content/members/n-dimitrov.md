@@ -1,21 +1,17 @@
 ---
-name: "Prof. N. Dimitrov"
+name: "Professor N. Dimitrov, MD, PhD"
 role: "Principal Investigator"
-title: "Prof. Dr. med."
 order: 1
-shortBio: "Principal investigator. Clinical research lead in orthopaedics and traumatology."
+affiliation: "Department of Orthopaedics and Traumatology, Medical University of Sofia · USBALO \"Prof. Boycho Boychev\", Sofia, Bulgaria"
+shortBio: "Principal investigator. Senior orthopaedic surgeon at USBALO \"Prof. Boycho Boychev\", Sofia, and faculty member at the Medical University of Sofia."
 interests:
-  - "Joint reconstruction"
-  - "Trauma outcomes"
-  - "Registry science"
+  - "Shoulder and elbow surgery"
+  - "Arthroscopic technique"
+  - "Patient-reported outcomes"
 collaborators:
   - "g-enev"
 ---
 
-<!-- TODO: replace with real bio -->
+Professor N. Dimitrov is a senior orthopaedic surgeon at USBALO "Prof. Boycho Boychev" in Sofia and a faculty member of the Department of Orthopaedics and Traumatology at the Medical University of Sofia. His clinical and academic focus is upper-extremity surgery — shoulder, elbow, and hand — with published work spanning arthroscopic technique, ligament reconstruction, and surgical outcomes.
 
-Prof. N. Dimitrov leads the Orthopaedic Research Group. His clinical and academic work focuses on prospective outcomes research in joint reconstruction and orthopaedic trauma, with a particular interest in patient-reported outcomes and the methodological design of long-term registries.
-
-He has supervised numerous resident and fellow research projects and serves as senior author on much of the group's published output. His approach emphasises pre-registration of protocols, transparent reporting, and open publication of findings whenever possible.
-
-In addition to his research activities he maintains an active surgical practice and contributes to graduate and postgraduate teaching in orthopaedics and traumatology.
+As Principal Investigator he leads the group's research programme and serves as senior author on the majority of its published output.

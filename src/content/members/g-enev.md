@@ -1,14 +1,15 @@
 ---
-name: "Dr. Georgi Enev"
+name: "Georgi Enev, MD"
 role: "Member"
 order: 100
 external: true
-affiliation: "Specialized Orthopaedic University Hospital, Universitätsspital Zürich (USZ)"
-shortBio: "External collaborator. Universitätsspital Zürich."
-interests: []
+affiliation: "Department of Consultation-Liaison Psychiatry, Universitätsspital Zürich (USZ), Switzerland"
+shortBio: "Doctor in the Department of Consultation-Liaison Psychiatry at Universitätsspital Zürich. Investigates translational aspects of psychiatric morbidity and musculoskeletal disease."
+interests:
+  - "Consultation-liaison psychiatry"
+  - "Psychiatric morbidity in musculoskeletal disease"
+  - "Patient-reported outcomes"
 collaborators: []
 ---
 
-<!-- TODO: replace with real bio -->
-
-Dr. Georgi Enev is an external collaborator of the Orthopaedic Research Group, based at the Specialized Orthopaedic University Hospital and Universitätsspital Zürich (USZ). He contributes to joint projects on outcomes research and shared registry work.
+Georgi Enev is a doctor in the Department of Consultation-Liaison Psychiatry at Universitätsspital Zürich (USZ). He investigates the translational aspects of psychiatric morbidity and musculoskeletal disease, and serves as the group's external methodological lead on the PHQ-9 and FUNCAP27 arthroplasty studies.
