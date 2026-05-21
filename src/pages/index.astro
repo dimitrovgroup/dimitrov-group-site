@@ -231,8 +231,8 @@ const description =
       gap: var(--space-7);
     }
   }
-  /* Very narrow screens: fall back to stacked so text has room to breathe. */
-  @media (max-width: 399px) {
+  /* Very narrow screens only (older small phones): fall back to stacked. */
+  @media (max-width: 339px) {
     .pi-grid { grid-template-columns: 1fr; gap: var(--space-4); }
   }
 
