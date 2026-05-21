@@ -1,6 +1,7 @@
-import fs from 'node:fs';
-import path from 'node:path';
 import yaml from 'js-yaml';
+// Inline the YAML at build time via Vite's `?raw` query. This avoids any
+// runtime filesystem access — the contents are bundled into the JS.
+import publicationsYaml from '~/data/publications.yml?raw';
 
 export type Publication = {
   id: string;
@@ -15,20 +16,13 @@ export type Publication = {
   abstract?: string;
 };
 
-// Resolve relative to project root. import.meta.url -> /src/utils/publications.ts
-const DATA_PATH = path.resolve(
-  path.dirname(new URL(import.meta.url).pathname),
-  '../data/publications.yml',
-);
-
 let cached: Publication[] | null = null;
 
 function load(): Publication[] {
   if (cached) return cached;
-  const raw = fs.readFileSync(DATA_PATH, 'utf8');
-  const parsed = yaml.load(raw) as Publication[] | null;
+  const parsed = yaml.load(publicationsYaml) as Publication[] | null;
   const list = Array.isArray(parsed) ? parsed : [];
-  // Normalise + sort desc by year, then by title for stable order.
+  // Sort desc by year, then by title for stable order.
   cached = [...list].sort((a, b) => {
     if (b.year !== a.year) return b.year - a.year;
     return a.title.localeCompare(b.title);
