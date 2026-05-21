@@ -8,7 +8,7 @@ pubmedName: "Adolf J"
 initials: "JA"
 portrait: "/team/j-adolf.jpg"
 portraitWebp: "/team/j-adolf.webp"
-shortBio: "Clinical fellow in orthopaedics and traumatology at the Medical University of Sofia and USBALO \"Boycho Boychev\"."
+shortBio: "Clinical fellow in orthopaedics and traumatology at USBALO \"Boycho Boychev\". Enjoys statistics and study design."
 interests:
   - "Orthopaedic outcomes"
   - "Periprosthetic complications"
