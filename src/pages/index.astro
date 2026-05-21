@@ -155,14 +155,18 @@ const description =
     <Section id="contact" eyebrow="Contact" title="Get in touch." lede="For collaborations, study enquiries, and academic correspondence.">
       <div class="card contact-card">
         <address class="contact-address">
-          <!-- TODO: real institutional address -->
-          Orthopaedic Research Group<br />
-          Sofia, Bulgaria
+          Specialized University Hospital for Orthopaedics<br />
+          &ldquo;Prof. Boycho Boychev&rdquo; &mdash; USBALO<br />
+          Nikola Petkov Blvd 56<br />
+          Gorna Banya, 1614 Sofia, Bulgaria
         </address>
-        <p class="row contact-links">
-          <a class="btn btn-primary" href="mailto:contact@dimitrov-group.eu">Email the group</a>
+        <div class="contact-links">
+          <a class="btn btn-primary contact-email" href="mailto:contact@dimitrov-group.eu">
+            <span class="contact-email-text">contact@dimitrov-group.eu</span>
+            <span aria-hidden="true" class="contact-email-arrow">&rarr;</span>
+          </a>
           <a class="btn btn-ghost" href="/contact/">Contact details</a>
-        </p>
+        </div>
       </div>
     </Section>
   </Reveal>
@@ -186,5 +190,31 @@ const description =
     color: var(--text-muted);
     line-height: 1.55;
   }
-  .contact-links { gap: var(--space-3); }
+  .contact-links {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-3);
+    margin-top: var(--space-2);
+  }
+  @media (min-width: 640px) {
+    .contact-links {
+      flex-direction: row;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  }
+  .contact-email {
+    justify-content: space-between;
+    gap: var(--space-4);
+    padding: 14px 22px;
+    font-size: var(--fs-body);
+    letter-spacing: -0.005em;
+  }
+  .contact-email-text { font-weight: 500; }
+  .contact-email-arrow {
+    transition: transform var(--dur) var(--ease);
+    display: inline-block;
+  }
+  .contact-email:hover .contact-email-arrow { transform: translateX(3px); }
 </style>
