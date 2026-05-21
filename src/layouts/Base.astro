@@ -45,18 +45,36 @@ const allJsonLd = jsonLd ? [orgJsonLd, jsonLd] : [orgJsonLd];
     <meta name="description" content={description} />
     <link rel="canonical" href={canonical} />
 
-    <!-- Theme bootstrap. Runs before paint, so the right theme is set immediately. -->
+    <!-- Theme bootstrap. Runs before paint, so the right theme is set
+         immediately. Also re-applies on every Astro view transition,
+         because the swap strips data-theme from <html>. -->
     <script is:inline>
       (function () {
-        try {
-          var stored = localStorage.getItem('theme');
-          if (stored === 'light' || stored === 'dark') {
-            document.documentElement.setAttribute('data-theme', stored);
-          } else {
-            var sys = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-            document.documentElement.setAttribute('data-theme', sys);
-          }
-        } catch (e) { /* ignore */ }
+        function applyTheme() {
+          try {
+            var stored = localStorage.getItem('theme');
+            var t;
+            if (stored === 'light' || stored === 'dark') {
+              t = stored;
+            } else {
+              t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            }
+            document.documentElement.setAttribute('data-theme', t);
+          } catch (e) { /* ignore */ }
+        }
+        applyTheme();
+        // Carry the theme into the next document BEFORE it's swapped in,
+        // so there's no flash of the wrong theme during view transitions.
+        document.addEventListener('astro:before-swap', function (e) {
+          try {
+            var t = document.documentElement.getAttribute('data-theme');
+            if (t && e && e.newDocument) {
+              e.newDocument.documentElement.setAttribute('data-theme', t);
+            }
+          } catch (err) { /* ignore */ }
+        });
+        // Safety net: also re-apply from localStorage right after swap.
+        document.addEventListener('astro:after-swap', applyTheme);
       })();
     </script>
 
