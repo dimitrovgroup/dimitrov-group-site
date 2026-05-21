@@ -1,5 +1,5 @@
 /* =========================================================
-   Orthopaedic Research Group — Prof. N. Dimitrov
+   Orthopaedic Research Group, Prof. N. Dimitrov
    Global styles. Mobile-first, Apple-inspired.
    ========================================================= */
 
@@ -17,7 +17,7 @@ input, textarea, select { font: inherit; color: inherit; }
 /* ----- Tokens --------------------------------------------- */
 
 :root {
-  /* Color — light */
+  /* Color, light */
   --bg:           #ffffff;
   --bg-soft:      #fbfbfd;   /* off-white surface, the Apple wash */
   --bg-elevated:  #ffffff;
@@ -49,7 +49,7 @@ input, textarea, select { font: inherit; color: inherit; }
   --fs-small:    0.9375rem;
   --fs-micro:    0.8125rem;
 
-  /* Spacing — 8px scale */
+  /* Spacing, 8px scale */
   --space-1:  4px;
   --space-2:  8px;
   --space-3:  16px;
@@ -79,7 +79,7 @@ input, textarea, select { font: inherit; color: inherit; }
   --dur-slow: 360ms;
 }
 
-/* Color — dark. Apple-style deep neutral, not pure black. */
+/* Color, dark. Apple-style deep neutral, not pure black. */
 :root[data-theme='dark'] {
   --bg:           #0b0b0d;
   --bg-soft:      #111114;

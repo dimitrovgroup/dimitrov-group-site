@@ -15,7 +15,7 @@ const { project } = Astro.props;
 const d = project.data;
 const { Content } = await project.render();
 
-const yearRange = d.endYear ? `${d.startYear}–${d.endYear}` : `${d.startYear}–present`;
+const yearRange = d.endYear ? `${d.startYear}-${d.endYear}` : `${d.startYear}-present`;
 const statusClass = `badge-${d.status.toLowerCase()}`;
 
 // Resolve lead member display name, if any.

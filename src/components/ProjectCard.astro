@@ -5,7 +5,7 @@ type Props = { project: CollectionEntry<'projects'> };
 const { project } = Astro.props;
 const d = project.data;
 
-const yearRange = d.endYear ? `${d.startYear}–${d.endYear}` : `${d.startYear}–present`;
+const yearRange = d.endYear ? `${d.startYear}-${d.endYear}` : `${d.startYear}-present`;
 const statusClass = `badge-${d.status.toLowerCase()}`;
 
 // Resolve the lead member's display name (if a leadMember slug is set).

@@ -14,6 +14,6 @@ collaborators:
   - "g-enev"
 ---
 
-Professor N. Dimitrov is a senior orthopaedic surgeon at USBALO "Prof. Boycho Boychev" in Sofia and a faculty member of the Department of Orthopaedics and Traumatology at the Medical University of Sofia. His clinical and academic focus is upper-extremity surgery — shoulder, elbow, and hand — with published work spanning arthroscopic technique, ligament reconstruction, and surgical outcomes.
+Professor N. Dimitrov is a senior orthopaedic surgeon at USBALO "Prof. Boycho Boychev" in Sofia and a faculty member of the Department of Orthopaedics and Traumatology at the Medical University of Sofia. His clinical and academic focus is upper-extremity surgery (shoulder, elbow, and hand), with published work spanning arthroscopic technique, ligament reconstruction, and surgical outcomes.
 
 As Principal Investigator he leads the group's research programme and serves as senior author on the majority of its published output.

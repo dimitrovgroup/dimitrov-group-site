@@ -5,7 +5,7 @@ status: "Ongoing"
 type: "prospective registry"
 startYear: 2026
 summary: "Single-centre prospective registry capturing implant data, perioperative variables, and clinical outcomes for primary and revision hip and knee arthroplasty. The dataset anchors all other arthroplasty studies of the group."
-ethicsApproval: "KENIMUS — Dossier 5, Universitätsklinik für Orthopädie und Traumatologie \"Prof. Boycho Boychev\" Sofia"
+ethicsApproval: "KENIMUS Dossier 5, Universitätsklinik für Orthopädie und Traumatologie \"Prof. Boycho Boychev\" Sofia"
 principalInvestigator: "n-dimitrov"
 leadMember: "d-tenev"
 members:

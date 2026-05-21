@@ -1,6 +1,6 @@
 import yaml from 'js-yaml';
 // Inline the YAML at build time via Vite's `?raw` query. This avoids any
-// runtime filesystem access — the contents are bundled into the JS.
+// runtime filesystem access; the contents are bundled into the JS.
 import publicationsYaml from '~/data/publications.yml?raw';
 
 export type Publication = {

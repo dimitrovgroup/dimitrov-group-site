@@ -1,11 +1,11 @@
 ---
 title: "PHQ-9 Depression Scores in Hip Arthroplasty Patients: A Prospective Observational Study"
-title_de: "Veränderung der Depressionswerte auf der PHQ-9-Skala bei Patientinnen und Patienten nach Hüftendoprothetik – prospektive Beobachtungsstudie"
+title_de: "Veränderung der Depressionswerte auf der PHQ-9-Skala bei Patientinnen und Patienten nach Hüftendoprothetik: prospektive Beobachtungsstudie"
 status: "Ongoing"
 type: "prospective observational study"
 startYear: 2026
-summary: "Prospective observational study of depressive symptom trajectories — measured with the PHQ-9 — in patients undergoing primary hip arthroplasty. Companion to the knee-arthroplasty PHQ-9 study; identical instrument, distinct cohort."
-ethicsApproval: "KENIMUS — Dossier 2, Universitätsklinik für Orthopädie und Traumatologie \"Prof. Boycho Boychev\" Sofia"
+summary: "Prospective observational study of depressive symptom trajectories, measured with the PHQ-9, in patients undergoing primary hip arthroplasty. Companion to the knee-arthroplasty PHQ-9 study; identical instrument, distinct cohort."
+ethicsApproval: "KENIMUS Dossier 2, Universitätsklinik für Orthopädie und Traumatologie \"Prof. Boycho Boychev\" Sofia"
 principalInvestigator: "n-dimitrov"
 leadMember: "g-enev"
 members:
