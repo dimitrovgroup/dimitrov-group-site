@@ -4,8 +4,8 @@
 
 <section class="hero">
   <div class="container hero-inner">
-    <p class="eyebrow">Clinical Research &middot; Orthopaedics &amp; Traumatology</p>
-    <h1 class="display">Orthopaedic Research Group</h1>
+    <p class="eyebrow hero-eyebrow">Clinical Research &middot; Orthopaedics &amp; Traumatology</p>
+    <h1 class="hero-title">Orthopaedic Research Group</h1>
     <p class="hero-pi muted">Professor N. Dimitrov, MD, PhD</p>
 
     <p class="lede hero-lede">
@@ -23,20 +23,36 @@
 
 <style>
   .hero {
-    min-height: 70vh;
+    min-height: 85vh;
     display: flex;
     align-items: center;
-    padding-block: var(--space-8);
+    padding-block: var(--space-9);
   }
   @media (min-width: 768px) {
-    .hero { min-height: 80vh; padding-inline: var(--space-3); }
+    .hero { padding-inline: var(--space-3); }
   }
   .hero-inner {
     display: flex;
     flex-direction: column;
     gap: var(--space-4);
-    max-width: 920px;
+    max-width: 1080px;
   }
+
+  /* The group name dominates. */
+  .hero-title {
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.02;
+    margin: 0;
+    color: var(--text);
+  }
+  @media (min-width: 1280px) {
+    /* Keep on one line on wide desktop. */
+    .hero-title { white-space: nowrap; }
+  }
+
+  /* Everything else recedes. */
   .hero-pi {
     font-size: var(--fs-lede);
     letter-spacing: -0.01em;
@@ -44,9 +60,10 @@
   }
   .hero-lede {
     margin-top: var(--space-2);
+    max-width: 56ch;
   }
   .hero-actions {
-    margin-top: var(--space-3);
+    margin-top: var(--space-4);
     gap: var(--space-3);
   }
   .hero-rule {
@@ -54,7 +71,42 @@
     width: 64px;
     height: 1px;
     background: var(--accent);
-    margin-top: var(--space-6);
+    margin-top: var(--space-7);
     opacity: 0.7;
+  }
+
+  /* Staggered fade-in on page load. */
+  .hero-eyebrow,
+  .hero-title,
+  .hero-pi,
+  .hero-lede,
+  .hero-actions,
+  .hero-rule {
+    opacity: 0;
+    transform: translateY(8px);
+    animation: heroFadeIn 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .hero-eyebrow { animation-delay:   0ms; }
+  .hero-title   { animation-delay: 100ms; }
+  .hero-pi      { animation-delay: 220ms; }
+  .hero-lede    { animation-delay: 340ms; }
+  .hero-actions { animation-delay: 460ms; }
+  .hero-rule    { animation-delay: 580ms; }
+
+  @keyframes heroFadeIn {
+    to { opacity: 1; transform: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-eyebrow,
+    .hero-title,
+    .hero-pi,
+    .hero-lede,
+    .hero-actions,
+    .hero-rule {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
   }
 </style>
