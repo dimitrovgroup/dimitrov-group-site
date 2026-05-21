@@ -50,21 +50,12 @@ function authorIsHighlight(author: string): boolean {
 ---
 
 <article
-  class={`pub ${pub.seniorAuthor ? 'is-senior' : ''}`}
+  class="pub"
   data-search-text={searchText}
   data-year={pub.year}
   data-members={dataMembers}
 >
-  <div class="pub-title-wrap">
-    {pub.seniorAuthor && <span class="pub-senior-bar" aria-hidden="true"></span>}
-    <h3 class="pub-title">{pub.title}</h3>
-  </div>
-
-  {pub.seniorAuthor && (
-    <p class="pub-badges">
-      <span class="badge badge-accent">Senior author</span>
-    </p>
-  )}
+  <h3 class="pub-title">{pub.title}</h3>
 
   <p class="pub-authors">
     {pub.authors.map((a, i) => {
@@ -109,17 +100,6 @@ function authorIsHighlight(author: string): boolean {
     background: var(--surface);
     border-color: var(--border);
   }
-  .pub-title-wrap {
-    display: flex;
-    align-items: stretch;
-    gap: var(--space-3);
-  }
-  .pub-senior-bar {
-    width: 4px;
-    border-radius: 2px;
-    background: var(--accent);
-    flex-shrink: 0;
-  }
   .pub-title {
     font-size: 1.125rem;
     font-weight: 600;
@@ -127,7 +107,6 @@ function authorIsHighlight(author: string): boolean {
     line-height: 1.35;
     margin: 0;
   }
-  .pub-badges { margin: var(--space-2) 0 0; }
   .pub-authors {
     margin: var(--space-2) 0 0;
     font-size: var(--fs-small);
