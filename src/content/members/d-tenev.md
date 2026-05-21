@@ -5,6 +5,7 @@ order: 11
 email: "dimitartenev@proton.me"
 affiliation: "Department of Orthopaedics, Medical University of Sofia · USBALO \"Prof. Boycho Boychev\", Sofia, Bulgaria"
 pubmedName: "Tenev D"
+initials: "DT"
 shortBio: "Medical doctor at USBALO \"Boycho Boychev\", Sofia. Responsible for patient data collection and the prosthesis registry."
 interests: []
 collaborators: []

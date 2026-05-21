@@ -52,7 +52,7 @@ const description = d.shortBio ?? `${d.name}, ${d.role}, Orthopaedic Research Gr
   <section>
     <div class="container member-page">
       <header class="member-head">
-        <Avatar name={d.name} src={d.portrait} size={192} />
+        <Avatar name={d.name} initials={d.initials} src={d.portrait} size={192} />
         <div class="member-head-text">
           <p class="eyebrow">{d.role}{d.external && ' · External collaborator'}</p>
           <h1>{d.name}</h1>
