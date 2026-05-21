@@ -209,12 +209,13 @@ const description =
     .pi-spotlight-nested { margin-bottom: var(--space-8); }
   }
   /* Two columns at every breakpoint — small mobile portrait compensates
-     for the low-resolution Dimitrov source image. */
+     for the low-resolution Dimitrov source image. Portrait sits at the TOP
+     of the row (align-items: start) so the eyebrow + name line up next to it. */
   .pi-grid {
     display: grid;
     gap: var(--space-3);
     grid-template-columns: 120px 1fr;
-    align-items: center;
+    align-items: start;
   }
   @media (min-width: 768px) {
     .pi-grid {
@@ -226,6 +227,7 @@ const description =
     .pi-grid {
       grid-template-columns: minmax(280px, 320px) 1fr;
       gap: var(--space-7);
+      align-items: center; /* desktop: portrait and text are similar height — center looks balanced */
     }
   }
   /* Very narrow screens only (older small phones): fall back to stacked. */
