@@ -44,7 +44,9 @@ const projects = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
+    title_de: z.string().optional(), // optional German title
     status: z.enum(['Ongoing', 'Recruiting', 'Completed', 'Planned', 'Paused']),
+    type: z.string().optional(), // e.g. "prospective observational study", "prospective registry"
     startYear: z.number().int().min(1990).max(2100),
     endYear: z.number().int().min(1990).max(2100).optional(),
     summary: z.string(),
@@ -55,6 +57,8 @@ const projects = defineCollection({
         id: z.string(), // e.g. "NCT0XXXXXXX"
       })
       .optional(),
+    principalInvestigator: z.string().optional(), // member slug
+    leadMember: z.string().optional(), // member slug of project lead / owner
     members: z.array(z.string()).default([]), // member slugs
     order: z.number().default(100),
     draft: z.boolean().default(false),
