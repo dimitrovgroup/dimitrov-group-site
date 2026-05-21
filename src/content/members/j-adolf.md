@@ -1,7 +1,7 @@
 ---
 name: "Jakob Adolf, MD"
-role: "Fellow"
-order: 4
+role: "Group Member"
+order: 20
 email: "adolf@hin.ch"
 affiliation: "Department of Orthopaedics, Medical University of Sofia · USBALO \"Boycho Boychev\", Sofia, Bulgaria"
 shortBio: "Clinical fellow in orthopaedics and traumatology at the Medical University of Sofia and USBALO \"Boycho Boychev\"."

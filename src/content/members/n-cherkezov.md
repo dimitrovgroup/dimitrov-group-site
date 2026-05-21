@@ -1,7 +1,7 @@
 ---
 name: "Nikolai Cherkezov, MD"
-role: "Fellow"
-order: 2
+role: "PhD Student"
+order: 10
 affiliation: "Department of Orthopaedics, Medical University of Sofia · USBALO \"Boycho Boychev\", Sofia, Bulgaria"
 shortBio: "Orthopaedic specialist at the Medical University of Sofia and USBALO \"Boycho Boychev\"."
 interests: []

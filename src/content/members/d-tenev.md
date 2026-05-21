@@ -1,7 +1,7 @@
 ---
 name: "Dimitar Tenev"
-role: "Member"
-order: 3
+role: "PhD Student"
+order: 11
 email: "dimitartenev@proton.me"
 shortBio: "Member of the research group. Role to be confirmed."
 interests: []
