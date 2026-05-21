@@ -2,18 +2,18 @@
 name: "Professor N. Dimitrov, MD, PhD"
 role: "Principal Investigator"
 order: 1
-affiliation: "Department of Orthopaedics and Traumatology, Medical University of Sofia · USBALO \"Prof. Boycho Boychev\", Sofia, Bulgaria"
+affiliation: "Clinic of Bone Pathology and General Orthopaedics, USBALO \"Prof. Boycho Boychev\" · Department of Orthopaedics and Traumatology, Medical University of Sofia"
 pubmedName: "Dimitrov N"
 initials: "ND"
-shortBio: "Principal investigator. Senior orthopaedic surgeon at USBALO \"Prof. Boycho Boychev\", Sofia, and faculty member at the Medical University of Sofia."
+shortBio: "Head of the Clinic of Bone Pathology and General Orthopaedics at USBALO \"Prof. Boycho Boychev\", Sofia. Lecturer at the Medical University of Sofia."
 interests:
-  - "Shoulder and elbow surgery"
-  - "Arthroscopic technique"
-  - "Patient-reported outcomes"
+  - "Shoulder surgery"
+  - "Arthroscopy"
+  - "Upper-limb reconstruction"
 collaborators:
   - "g-enev"
 ---
 
-Professor N. Dimitrov is a senior orthopaedic surgeon at USBALO "Prof. Boycho Boychev" in Sofia and a faculty member of the Department of Orthopaedics and Traumatology at the Medical University of Sofia. His clinical and academic focus is upper-extremity surgery (shoulder, elbow, and hand), with published work spanning arthroscopic technique, ligament reconstruction, and surgical outcomes.
+Professor N. Dimitrov is Head of the Clinic of Bone Pathology and General Orthopaedics at USBALO "Prof. Boycho Boychev", Sofia, where he has practised for nearly three decades. He is also a lecturer at the Department of Orthopaedics and Traumatology, Medical University of Sofia, and a member of the national Commission for Arthroscopy Training.
 
-As Principal Investigator he leads the group's research programme and serves as senior author on the majority of its published output.
+His clinical and research focus is shoulder surgery, arthroscopic technique, and upper-limb reconstruction, with published work spanning rotator-cuff repair, elbow arthroscopy, and ligament reconstruction. As Principal Investigator he leads the research programme of the group and serves as senior author on the majority of its published output.
