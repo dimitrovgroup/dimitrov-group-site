@@ -1,12 +1,11 @@
 ---
-name: "Nikolai Cherkezov"
-role: "Member"
+name: "Nikolai Cherkezov, MD"
+role: "Fellow"
 order: 2
-shortBio: "Member of the research group. Role to be confirmed."
+affiliation: "Department of Orthopaedics, Medical University of Sofia · USBALO \"Boycho Boychev\", Sofia, Bulgaria"
+shortBio: "Orthopaedic specialist at the Medical University of Sofia and USBALO \"Boycho Boychev\"."
 interests: []
 collaborators: []
 ---
 
-<!-- TODO: replace with real bio and confirm role -->
-
-Nikolai Cherkezov is a member of the Orthopaedic Research Group. A short biography will be added once confirmed.
+Nikolai Cherkezov (Николай Черкезов) is a clinical member of the Orthopaedic Research Group at the Department of Orthopaedics, Medical University of Sofia, and USBALO "Boycho Boychev" in Sofia.
