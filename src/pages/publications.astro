@@ -4,6 +4,16 @@ import PublicationItem from '~/components/PublicationItem.astro';
 import { getPublications } from '~/utils/publications.ts';
 
 const pubs = getPublications();
+
+// Group by year, descending. Within a year, preserve the sort coming from
+// getPublications() (year desc, then PMID desc).
+const byYear = new Map<number, typeof pubs>();
+for (const p of pubs) {
+  const list = byYear.get(p.year) ?? [];
+  list.push(p);
+  byYear.set(p.year, list);
+}
+const yearGroups = [...byYear.entries()].sort(([a], [b]) => b - a);
 ---
 
 <Base title="Publications" description="Peer-reviewed publications from the Orthopaedic Research Group.">
@@ -15,13 +25,51 @@ const pubs = getPublications();
         <p class="lede">Full bibliography. Senior-author papers are marked.</p>
       </header>
 
-      <div class="stack pubs-list">
-        {pubs.map((p) => <PublicationItem pub={p} />)}
+      <div class="pubs-years">
+        {yearGroups.map(([year, items]) => (
+          <section class="pub-year" aria-labelledby={`y-${year}`}>
+            <h2 id={`y-${year}`} class="pub-year-head">{year}</h2>
+            <div class="stack pub-year-list">
+              {items.map((p) => <PublicationItem pub={p} />)}
+            </div>
+          </section>
+        ))}
       </div>
     </div>
   </section>
 </Base>
 
 <style>
-  .pubs-list { gap: var(--space-2); }
+  .pubs-years {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-7);
+  }
+  .pub-year {
+    display: grid;
+    gap: var(--space-4);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 900px) {
+    .pub-year {
+      grid-template-columns: 120px 1fr;
+      gap: var(--space-5);
+      align-items: start;
+    }
+  }
+  .pub-year-head {
+    font-size: clamp(2rem, 1.6rem + 1.2vw, 2.5rem);
+    font-weight: 300;
+    letter-spacing: -0.025em;
+    color: var(--text-subtle);
+    margin: 0;
+    line-height: 1;
+  }
+  @media (min-width: 900px) {
+    .pub-year-head {
+      position: sticky;
+      top: calc(var(--header-h) + var(--space-3));
+    }
+  }
+  .pub-year-list { gap: var(--space-2); }
 </style>
