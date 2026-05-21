@@ -1,0 +1,62 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+type Props = {
+  name: string;
+  src?: ImageMetadata | string;
+  size?: number;
+};
+
+const { name, src, size = 96 } = Astro.props;
+
+function initials(n: string): string {
+  const parts = n.replace(/\b(Prof|Dr|PhD|MD|Mr|Mrs|Ms)\.?/gi, '').trim().split(/\s+/);
+  if (parts.length === 0) return '?';
+  const first = parts[0]?.[0] ?? '';
+  const last  = parts.length > 1 ? parts[parts.length - 1]?.[0] ?? '' : '';
+  return (first + last).toUpperCase() || '?';
+}
+
+const mono = initials(name);
+const sizePx = `${size}px`;
+const fontPx = `${Math.round(size * 0.36)}px`;
+---
+
+<div class="avatar" style={`--avatar-size: ${sizePx}; --avatar-font: ${fontPx};`}>
+  {src && typeof src !== 'string' ? (
+    <Image src={src} alt={`Portrait of ${name}`} width={size * 2} height={size * 2} class="avatar-img" />
+  ) : src && typeof src === 'string' ? (
+    <img src={src} alt={`Portrait of ${name}`} class="avatar-img" width={size} height={size} loading="lazy" />
+  ) : (
+    <span class="avatar-mono" aria-hidden="true">{mono}</span>
+  )}
+  {!src && <span class="visually-hidden">{name}</span>}
+</div>
+
+<style>
+  .avatar {
+    width: var(--avatar-size);
+    height: var(--avatar-size);
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--accent-soft);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-sm);
+    flex-shrink: 0;
+  }
+  .avatar-img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+  }
+  .avatar-mono {
+    color: var(--accent-ink);
+    font-weight: 600;
+    font-size: var(--avatar-font);
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+</style>

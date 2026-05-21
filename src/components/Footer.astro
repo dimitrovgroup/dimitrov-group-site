@@ -1,0 +1,114 @@
+---
+const year = new Date().getFullYear();
+const links = [
+  { href: '/#about',        label: 'About' },
+  { href: '/team/',         label: 'Team' },
+  { href: '/publications/', label: 'Publications' },
+  { href: '/projects/',     label: 'Projects' },
+  { href: '/activities/',   label: 'Activities' },
+  { href: '/contact/',      label: 'Contact' },
+];
+---
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div class="footer-col">
+      <div class="wordmark">
+        <span class="wordmark-name">Orthopaedic Research Group</span>
+        <span class="wordmark-dot" aria-hidden="true"></span>
+        <span class="wordmark-pi">Prof. N. Dimitrov</span>
+      </div>
+      <p class="muted footer-tag">Clinical research in orthopaedics and traumatology.</p>
+      <p class="subtle footer-copy">&copy; {year} Dimitrov Group</p>
+    </div>
+
+    <div class="footer-col">
+      <h2 class="footer-heading">Site</h2>
+      <ul class="footer-list">
+        {links.map((l) => (
+          <li><a href={l.href}>{l.label}</a></li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h2 class="footer-heading">Contact</h2>
+      <address class="footer-address">
+        <!-- TODO: real address -->
+        Orthopaedic Research Group<br />
+        Sofia, Bulgaria
+      </address>
+      <ul class="footer-list">
+        <li><a href="mailto:dimitartenev@proton.me">dimitartenev@proton.me</a></li>
+        <li class="subtle"><!-- TODO: phone number -->+ TODO</li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--border);
+    background: var(--bg-soft);
+    padding-block: var(--space-7);
+    margin-top: var(--space-8);
+  }
+  .footer-inner {
+    display: grid;
+    gap: var(--space-6);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 768px) {
+    .footer-inner { grid-template-columns: 1.4fr 1fr 1.2fr; gap: var(--space-7); }
+  }
+  .footer-col { display: flex; flex-direction: column; gap: var(--space-3); }
+  .wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-weight: 600;
+    font-size: var(--fs-small);
+  }
+  .wordmark-dot {
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--accent);
+  }
+  .wordmark-pi {
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: var(--fs-micro);
+  }
+  .footer-tag { margin: 0; max-width: 40ch; font-size: var(--fs-small); }
+  .footer-copy { margin: 0; font-size: var(--fs-micro); }
+
+  .footer-heading {
+    font-size: var(--fs-micro);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-subtle);
+    margin: 0 0 var(--space-2);
+  }
+  .footer-list {
+    list-style: none;
+    padding: 0; margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    font-size: var(--fs-small);
+  }
+  .footer-list a {
+    color: var(--text);
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    transition: color var(--dur) var(--ease);
+  }
+  .footer-list a:hover { color: var(--accent-ink); }
+  .footer-address {
+    font-style: normal;
+    font-size: var(--fs-small);
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+</style>

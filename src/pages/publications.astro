@@ -1,0 +1,117 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '~/layouts/Base.astro';
+import PublicationItem from '~/components/PublicationItem.astro';
+import SearchBox from '~/components/SearchBox.astro';
+import { getPublications, getPublicationYears } from '~/utils/publications.ts';
+
+const pubs   = getPublications();
+const years  = getPublicationYears();
+
+const members = (await getCollection('members', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.order - b.data.order);
+---
+
+<Base title="Publications" description="Peer-reviewed publications from the Orthopaedic Research Group.">
+  <section>
+    <div class="container">
+      <header class="section-header">
+        <p class="eyebrow">Publications</p>
+        <h1>Peer-reviewed work.</h1>
+        <p class="lede">Full bibliography. Filter by year or by group member. Senior-author papers are marked.</p>
+      </header>
+
+      <div class="filters">
+        <SearchBox target=".pub" label="Search publications" placeholder="Search by title or author" />
+        <div class="filter-row">
+          <label class="filter">
+            <span class="filter-label">Year</span>
+            <select id="filter-year">
+              <option value="">All years</option>
+              {years.map((y) => <option value={String(y)}>{y}</option>)}
+            </select>
+          </label>
+          <label class="filter">
+            <span class="filter-label">Member</span>
+            <select id="filter-member">
+              <option value="">All members</option>
+              {members.map((m) => <option value={m.slug}>{m.data.name}</option>)}
+            </select>
+          </label>
+        </div>
+      </div>
+
+      <div class="stack pubs-list">
+        {pubs.map((p) => <PublicationItem pub={p} />)}
+      </div>
+
+      <p id="pubs-empty" class="muted center pubs-empty" hidden>
+        No publications match the current filters.
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .filters {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    margin-bottom: var(--space-6);
+  }
+  @media (min-width: 768px) {
+    .filters { flex-direction: row; align-items: center; justify-content: space-between; gap: var(--space-4); }
+  }
+  .filter-row { display: flex; gap: var(--space-3); flex-wrap: wrap; }
+  .filter { display: inline-flex; flex-direction: column; gap: 4px; font-size: var(--fs-micro); }
+  .filter-label {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-subtle);
+    font-weight: 500;
+  }
+  .filter select {
+    min-height: 44px;
+    padding: 8px 14px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border-strong);
+    background: var(--bg-elevated);
+    font-size: var(--fs-small);
+    color: var(--text);
+  }
+  .filter select:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+  .pubs-list { gap: var(--space-2); }
+  .pubs-empty { margin-top: var(--space-6); }
+  .pub[data-hidden='1'] { display: none; }
+</style>
+
+<script>
+  const yearSel   = document.getElementById('filter-year')   as HTMLSelectElement | null;
+  const memberSel = document.getElementById('filter-member') as HTMLSelectElement | null;
+  const empty     = document.getElementById('pubs-empty');
+
+  function apply() {
+    const y = yearSel?.value ?? '';
+    const m = memberSel?.value ?? '';
+    const items = document.querySelectorAll<HTMLElement>('.pub');
+    let visible = 0;
+    items.forEach((el) => {
+      const itemYear = el.dataset.year ?? '';
+      const itemMembers = (el.dataset.members ?? '').split(',');
+      const search = el.dataset.matchSearch ?? '1';
+      const okY = y === '' || itemYear === y;
+      const okM = m === '' || itemMembers.includes(m);
+      const okS = search === '1';
+      const show = okY && okM && okS;
+      el.dataset.hidden = show ? '0' : '1';
+      if (show) visible++;
+    });
+    if (empty) empty.toggleAttribute('hidden', visible !== 0);
+  }
+
+  yearSel?.addEventListener('change', apply);
+  memberSel?.addEventListener('change', apply);
+  // Re-apply when SearchBox changes data-match-search.
+  document.addEventListener('filterchange', apply);
+  apply();
+</script>

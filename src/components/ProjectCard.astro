@@ -1,0 +1,73 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+type Props = { project: CollectionEntry<'projects'> };
+const { project } = Astro.props;
+const d = project.data;
+
+const yearRange = d.endYear ? `${d.startYear}–${d.endYear}` : `${d.startYear}–present`;
+const statusClass = `badge-${d.status.toLowerCase()}`;
+---
+
+<article class="card card-hover project-card">
+  <div class="project-head">
+    <span class={`badge ${statusClass}`}>{d.status}</span>
+    <span class="subtle project-years">{yearRange}</span>
+  </div>
+  <h3 class="project-title">{d.title}</h3>
+  <p class="muted project-summary">{d.summary}</p>
+
+  {(d.ethicsApproval || d.registry) && (
+    <footer class="project-foot row">
+      {d.ethicsApproval && (
+        <span class="project-ethics" title="Ethics approval">
+          <span class="visually-hidden">Ethics approval: </span>
+          {d.ethicsApproval}
+        </span>
+      )}
+      {d.registry && (
+        <a
+          class="project-registry"
+          href={
+            d.registry.name === 'ClinicalTrials.gov'
+              ? `https://clinicaltrials.gov/study/${d.registry.id}`
+              : `https://www.google.com/search?q=${encodeURIComponent(`${d.registry.name} ${d.registry.id}`)}`
+          }
+          target="_blank"
+          rel="noopener"
+        >
+          {d.registry.name}: {d.registry.id} <span aria-hidden="true">&#8599;</span>
+        </a>
+      )}
+    </footer>
+  )}
+</article>
+
+<style>
+  .project-card { display: flex; flex-direction: column; gap: var(--space-3); height: 100%; }
+  .project-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+  .project-years { font-size: var(--fs-micro); }
+  .project-title { margin: 0; }
+  .project-summary { margin: 0; font-size: var(--fs-small); }
+  .project-foot {
+    margin-top: auto;
+    padding-top: var(--space-3);
+    border-top: 1px solid var(--border);
+    font-size: var(--fs-micro);
+    gap: var(--space-4);
+  }
+  .project-ethics {
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+  }
+  .project-registry {
+    color: var(--accent-ink);
+    font-weight: 500;
+  }
+  .project-registry:hover { text-decoration: underline; }
+</style>

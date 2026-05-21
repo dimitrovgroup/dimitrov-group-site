@@ -1,0 +1,62 @@
+---
+// Typographic hero. Centred vertically, generous whitespace.
+---
+
+<section class="hero">
+  <div class="container hero-inner">
+    <p class="eyebrow">Clinical Research &middot; Orthopaedics &amp; Traumatology</p>
+    <h1 class="display">Orthopaedic Research Group</h1>
+    <p class="hero-pi muted">Prof. N. Dimitrov</p>
+
+    <p class="lede hero-lede">
+      <!-- TODO: PI to confirm the mission statement -->
+      Clinical research in orthopaedics and traumatology. Outcomes-driven, prospectively designed,
+      openly published.
+    </p>
+
+    <div class="hero-actions row">
+      <a class="btn btn-primary" href="/#research">Our research</a>
+      <a class="btn btn-ghost"   href="/#team">Meet the team</a>
+    </div>
+
+    <span class="hero-rule" aria-hidden="true"></span>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    padding-block: var(--space-8);
+  }
+  @media (min-width: 768px) {
+    .hero { min-height: 80vh; padding-inline: var(--space-3); }
+  }
+  .hero-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+    max-width: 920px;
+  }
+  .hero-pi {
+    font-size: var(--fs-lede);
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .hero-lede {
+    margin-top: var(--space-2);
+  }
+  .hero-actions {
+    margin-top: var(--space-3);
+    gap: var(--space-3);
+  }
+  .hero-rule {
+    display: block;
+    width: 64px;
+    height: 1px;
+    background: var(--accent);
+    margin-top: var(--space-6);
+    opacity: 0.7;
+  }
+</style>

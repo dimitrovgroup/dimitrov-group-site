@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '~/layouts/Base.astro';
+import MemberCard from '~/components/MemberCard.astro';
+
+const members = (await getCollection('members', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.order - b.data.order);
+
+const internal = members.filter((m) => !m.data.external);
+const external = members.filter((m) =>  m.data.external);
+---
+
+<Base title="Team" description="Members of the Orthopaedic Research Group and external collaborators.">
+  <section>
+    <div class="container">
+      <header class="section-header">
+        <p class="eyebrow">Team</p>
+        <h1>The people behind the group.</h1>
+        <p class="lede">Researchers, clinicians and external collaborators.</p>
+      </header>
+
+      <h2 class="team-subhead">Members</h2>
+      <div class="grid grid-3">
+        {internal.map((m) => <MemberCard member={m} />)}
+      </div>
+
+      {external.length > 0 && (
+        <>
+          <h2 class="team-subhead">Collaborators</h2>
+          <div class="grid grid-3">
+            {external.map((m) => <MemberCard member={m} />)}
+          </div>
+        </>
+      )}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .team-subhead {
+    margin: var(--space-6) 0 var(--space-4);
+    font-size: var(--fs-micro);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-subtle);
+    font-weight: 600;
+  }
+</style>

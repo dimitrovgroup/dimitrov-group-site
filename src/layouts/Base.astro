@@ -1,0 +1,131 @@
+---
+import '~/styles/global.css';
+import Nav from '~/components/Nav.astro';
+import Footer from '~/components/Footer.astro';
+
+type Props = {
+  title: string;
+  description: string;
+  path?: string;
+  ogImage?: string;
+  jsonLd?: Record<string, unknown>;
+};
+
+const { title, description, path, ogImage, jsonLd } = Astro.props;
+
+const site = Astro.site?.toString().replace(/\/$/, '') ?? 'https://dimitrov-group.eu';
+const canonical = path
+  ? `${site}${path.startsWith('/') ? path : `/${path}`}`
+  : new URL(Astro.url.pathname, site).toString();
+
+const fullTitle = `${title} · Orthopaedic Research Group`;
+const ogImg = ogImage ? (ogImage.startsWith('http') ? ogImage : `${site}${ogImage}`) : `${site}/og-default.png`;
+
+const orgJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'MedicalOrganization',
+  name: 'Orthopaedic Research Group — Prof. N. Dimitrov',
+  alternateName: 'Dimitrov Group',
+  url: site,
+  description:
+    'Clinical research in orthopaedics and traumatology. Outcomes-driven, prospectively designed, openly published.',
+  medicalSpecialty: ['Orthopaedics', 'Traumatology'],
+};
+
+const allJsonLd = jsonLd ? [orgJsonLd, jsonLd] : [orgJsonLd];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- Theme bootstrap. Runs before paint, so the right theme is set immediately. -->
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          if (stored === 'light' || stored === 'dark') {
+            document.documentElement.setAttribute('data-theme', stored);
+          } else {
+            var sys = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            document.documentElement.setAttribute('data-theme', sys);
+          }
+        } catch (e) { /* ignore */ }
+      })();
+    </script>
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="theme-color" content="#0F8C7A" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Orthopaedic Research Group" />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImg} />
+    <meta property="og:locale" content="en" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImg} />
+
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    {allJsonLd.map((obj) => (
+      <script type="application/ld+json" set:html={JSON.stringify(obj)} />
+    ))}
+  </head>
+
+  <body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+    <Nav />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+
+    <style>
+      .skip-link {
+        position: absolute;
+        left: -9999px;
+        top: 0;
+        background: var(--accent);
+        color: #fff;
+        padding: 10px 16px;
+        border-radius: var(--radius-sm);
+        z-index: 100;
+      }
+      .skip-link:focus { left: var(--space-3); top: var(--space-3); }
+    </style>
+
+    <script>
+      // Gentle fade-and-rise reveal.
+      const els = document.querySelectorAll<HTMLElement>('.reveal');
+      if ('IntersectionObserver' in window && els.length > 0) {
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const e of entries) {
+              if (e.isIntersecting) {
+                e.target.classList.add('is-visible');
+                io.unobserve(e.target);
+              }
+            }
+          },
+          { rootMargin: '0px 0px -8% 0px', threshold: 0.05 },
+        );
+        els.forEach((el) => io.observe(el));
+      } else {
+        // No IO: just reveal immediately.
+        els.forEach((el) => el.classList.add('is-visible'));
+      }
+    </script>
+  </body>
+</html>

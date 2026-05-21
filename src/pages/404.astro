@@ -1,0 +1,28 @@
+---
+import Base from '~/layouts/Base.astro';
+---
+
+<Base title="Not found" description="The page you were looking for could not be found.">
+  <section class="nf">
+    <div class="container nf-inner">
+      <p class="eyebrow">404</p>
+      <h1 class="display">This page isn't here.</h1>
+      <p class="lede">Try the homepage or the team directory.</p>
+      <div class="row nf-actions">
+        <a class="btn btn-primary" href="/">Home</a>
+        <a class="btn btn-ghost"   href="/team/">Team</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .nf { min-height: 70vh; display: flex; align-items: center; }
+  .nf-inner {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    max-width: 720px;
+  }
+  .nf-actions { gap: var(--space-3); margin-top: var(--space-3); }
+</style>

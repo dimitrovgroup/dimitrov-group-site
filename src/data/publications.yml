@@ -1,0 +1,68 @@
+# Placeholder publications. Replace with the real list.
+# To add a publication, copy any block below, paste at the top, edit the fields.
+# - pmid: PubMed ID (digits only)
+# - doi:  full DOI string, e.g. 10.1007/s00264-024-06000-0
+# - members: list of member slugs from /src/content/members/
+# - seniorAuthor: true if a group member is the senior (last) author
+
+- id: "placeholder-2025-registry"
+  title: "Two-year outcomes of a prospective registry for primary total knee arthroplasty: a multicentre cohort"
+  authors:
+    - "Cherkezov N."
+    - "Tenev D."
+    - "Enev G."
+    - "Dimitrov N."
+  journal: "Journal of Orthopaedic Research"
+  year: 2025
+  pmid: "00000001"
+  doi: "10.0000/example.0001"
+  members:
+    - "n-cherkezov"
+    - "d-tenev"
+    - "g-enev"
+    - "n-dimitrov"
+  seniorAuthor: true
+  abstract: "Placeholder abstract. Replace with the published abstract."
+
+- id: "placeholder-2024-trauma"
+  title: "Functional recovery after operative fixation of complex tibial plateau fractures: a prospective single-centre study"
+  authors:
+    - "Tenev D."
+    - "Dimitrov N."
+  journal: "International Orthopaedics"
+  year: 2024
+  pmid: "00000002"
+  doi: "10.0000/example.0002"
+  members:
+    - "d-tenev"
+    - "n-dimitrov"
+  seniorAuthor: true
+
+- id: "placeholder-2024-hip"
+  title: "Patient-reported outcomes after primary total hip arthroplasty in patients under 50: a five-year follow-up"
+  authors:
+    - "Enev G."
+    - "Cherkezov N."
+    - "Dimitrov N."
+  journal: "Bone & Joint Journal"
+  year: 2024
+  pmid: "00000003"
+  doi: "10.0000/example.0003"
+  members:
+    - "g-enev"
+    - "n-cherkezov"
+    - "n-dimitrov"
+  seniorAuthor: true
+
+- id: "placeholder-2023-methods"
+  title: "Methodological considerations for prospective orthopaedic registries in resource-limited settings"
+  authors:
+    - "Dimitrov N."
+    - "Cherkezov N."
+  journal: "Acta Orthopaedica"
+  year: 2023
+  doi: "10.0000/example.0004"
+  members:
+    - "n-dimitrov"
+    - "n-cherkezov"
+  seniorAuthor: false

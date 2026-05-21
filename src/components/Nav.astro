@@ -1,0 +1,289 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+
+const links = [
+  { href: '/#about',        label: 'About' },
+  { href: '/team/',         label: 'Team' },
+  { href: '/publications/', label: 'Publications' },
+  { href: '/projects/',     label: 'Projects' },
+  { href: '/activities/',   label: 'Activities' },
+  { href: '/contact/',      label: 'Contact' },
+];
+
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+function isActive(href: string): boolean {
+  if (href.startsWith('/#')) return false;
+  const norm = href.replace(/\/$/, '') || '/';
+  return currentPath === norm;
+}
+---
+
+<header class="nav" id="site-nav">
+  <div class="nav-inner container">
+    <a href="/" class="wordmark" aria-label="Orthopaedic Research Group, Prof. N. Dimitrov — home">
+      <span class="wordmark-full">
+        <span class="wordmark-name">Orthopaedic Research Group</span>
+        <span class="wordmark-dot" aria-hidden="true"></span>
+        <span class="wordmark-pi">Prof. N. Dimitrov</span>
+      </span>
+      <span class="wordmark-short">Dimitrov Group</span>
+    </a>
+
+    <nav class="nav-links" aria-label="Primary">
+      <ul>
+        {links.map((l) => (
+          <li>
+            <a href={l.href} class={isActive(l.href) ? 'is-active' : ''}>{l.label}</a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <div class="nav-trail">
+      <ThemeToggle />
+      <button
+        id="nav-toggle"
+        type="button"
+        class="nav-burger"
+        aria-label="Open menu"
+        aria-controls="nav-sheet"
+        aria-expanded="false"
+      >
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+          <line x1="4" y1="8"  x2="20" y2="8"></line>
+          <line x1="4" y1="16" x2="20" y2="16"></line>
+        </svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div id="nav-sheet" class="nav-sheet" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Site navigation">
+  <div class="nav-sheet-top container">
+    <span class="wordmark-name">Orthopaedic Research Group</span>
+    <button id="nav-close" type="button" class="nav-close" aria-label="Close menu">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true">
+        <line x1="6" y1="6"   x2="18" y2="18"></line>
+        <line x1="18" y1="6"  x2="6"  y2="18"></line>
+      </svg>
+    </button>
+  </div>
+  <nav class="nav-sheet-links container" aria-label="Mobile">
+    <ul class="stack">
+      {links.map((l) => (
+        <li><a href={l.href}>{l.label}</a></li>
+      ))}
+    </ul>
+  </nav>
+</div>
+
+<style>
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    height: var(--header-h);
+    background: var(--bg);
+    border-bottom: 1px solid transparent;
+    transition: background-color var(--dur) var(--ease),
+                border-color var(--dur) var(--ease),
+                backdrop-filter var(--dur) var(--ease);
+  }
+  .nav.is-scrolled {
+    background: color-mix(in oklab, var(--bg) 80%, transparent);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border-bottom-color: var(--border);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 100%;
+    gap: var(--space-4);
+  }
+
+  .wordmark {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    color: var(--text);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    font-size: var(--fs-small);
+    min-height: 44px;
+  }
+  .wordmark-name { color: var(--text); }
+  .wordmark-dot {
+    width: 4px; height: 4px; border-radius: 50%;
+    background: var(--accent);
+    display: inline-block;
+  }
+  .wordmark-pi {
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: var(--fs-micro);
+  }
+  .wordmark-full { display: none; align-items: center; gap: var(--space-2); }
+  .wordmark-short { display: inline; }
+  @media (min-width: 768px) {
+    .wordmark-full { display: inline-flex; }
+    .wordmark-short { display: none; }
+  }
+
+  .nav-links { display: none; }
+  @media (min-width: 1024px) {
+    .nav-links { display: block; }
+    .nav-links ul {
+      display: flex;
+      gap: var(--space-5);
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .nav-links a {
+      position: relative;
+      font-size: var(--fs-small);
+      color: var(--text);
+      padding: 4px 0;
+      transition: opacity var(--dur) var(--ease);
+    }
+    .nav-links a:hover { opacity: 0.7; }
+    .nav-links a.is-active::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      bottom: -4px;
+      height: 1px;
+      background: var(--accent);
+    }
+  }
+
+  .nav-trail {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+  .nav-burger {
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    width: 44px; height: 44px;
+    border-radius: var(--radius-pill);
+    color: var(--text);
+    transition: background-color var(--dur) var(--ease);
+  }
+  .nav-burger:hover { background: var(--surface); }
+  @media (min-width: 1024px) { .nav-burger { display: none; } }
+
+  /* Mobile sheet */
+  .nav-sheet {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    background: var(--bg);
+    transform: translateY(-100%);
+    transition: transform var(--dur-slow) var(--ease);
+    visibility: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  .nav-sheet.is-open {
+    transform: translateY(0);
+    visibility: visible;
+  }
+  .nav-sheet-top {
+    height: var(--header-h);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .nav-close {
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    width: 44px; height: 44px;
+    border-radius: var(--radius-pill);
+    color: var(--text);
+  }
+  .nav-close:hover { background: var(--surface); }
+  .nav-sheet-links { padding-block: var(--space-5); }
+  .nav-sheet-links ul { list-style: none; padding: 0; margin: 0; }
+  .nav-sheet-links a {
+    display: block;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--text);
+    padding: var(--space-3) 0;
+    min-height: 44px;
+  }
+  .nav-sheet-links a:hover { color: var(--accent-ink); }
+</style>
+
+<script>
+  // Scroll-aware nav.
+  const nav = document.getElementById('site-nav');
+  if (nav) {
+    const onScroll = () => {
+      if (window.scrollY > 8) nav.classList.add('is-scrolled');
+      else nav.classList.remove('is-scrolled');
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+  }
+
+  // Mobile sheet with focus trap.
+  const toggle = document.getElementById('nav-toggle');
+  const sheet  = document.getElementById('nav-sheet');
+  const close  = document.getElementById('nav-close');
+
+  function getFocusables(root: HTMLElement): HTMLElement[] {
+    return Array.from(
+      root.querySelectorAll<HTMLElement>(
+        'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])',
+      ),
+    );
+  }
+
+  let lastFocused: HTMLElement | null = null;
+
+  function openSheet() {
+    if (!sheet || !toggle) return;
+    lastFocused = document.activeElement as HTMLElement | null;
+    sheet.classList.add('is-open');
+    sheet.setAttribute('aria-hidden', 'false');
+    toggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+    const first = getFocusables(sheet)[0];
+    first?.focus();
+  }
+  function closeSheet() {
+    if (!sheet || !toggle) return;
+    sheet.classList.remove('is-open');
+    sheet.setAttribute('aria-hidden', 'true');
+    toggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    lastFocused?.focus();
+  }
+
+  toggle?.addEventListener('click', openSheet);
+  close?.addEventListener('click', closeSheet);
+
+  document.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (!sheet?.classList.contains('is-open')) return;
+    if (e.key === 'Escape') {
+      e.preventDefault();
+      closeSheet();
+      return;
+    }
+    if (e.key === 'Tab') {
+      const f = getFocusables(sheet);
+      if (f.length === 0) return;
+      const first = f[0];
+      const last  = f[f.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault(); last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault(); first.focus();
+      }
+    }
+  });
+</script>

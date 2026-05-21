@@ -1,0 +1,68 @@
+---
+type Props = {
+  /** CSS selector matching the items to filter. Items must expose
+   *  `data-search-text` (already lowercased). */
+  target: string;
+  placeholder?: string;
+  label?: string;
+};
+const { target, placeholder = 'Search', label = 'Search publications' } = Astro.props;
+---
+
+<div class="search">
+  <label for="search-input" class="visually-hidden">{label}</label>
+  <input
+    id="search-input"
+    type="search"
+    class="search-input"
+    placeholder={placeholder}
+    autocomplete="off"
+    data-search-target={target}
+  />
+</div>
+
+<style>
+  .search { width: 100%; max-width: 480px; }
+  .search-input {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 16px;
+    border-radius: var(--radius-pill);
+    border: 1px solid var(--border-strong);
+    background: var(--bg-elevated);
+    font-size: var(--fs-small);
+    color: var(--text);
+    transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+  }
+  .search-input:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+  }
+  .search-input::placeholder { color: var(--text-subtle); }
+</style>
+
+<script>
+  const input = document.getElementById('search-input') as HTMLInputElement | null;
+  if (input) {
+    const targetSel = input.dataset.searchTarget || '';
+    let timer: number | undefined;
+
+    const run = () => {
+      const q = input.value.trim().toLowerCase();
+      const items = document.querySelectorAll<HTMLElement>(targetSel);
+      items.forEach((el) => {
+        const txt = el.dataset.searchText || '';
+        const hit = q === '' || txt.includes(q);
+        el.dataset.matchSearch = hit ? '1' : '0';
+        // Visibility may also depend on other filters; the page logic decides.
+        el.dispatchEvent(new CustomEvent('filterchange', { bubbles: true }));
+      });
+    };
+
+    input.addEventListener('input', () => {
+      window.clearTimeout(timer);
+      timer = window.setTimeout(run, 150);
+    });
+  }
+</script>

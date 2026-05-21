@@ -1,0 +1,52 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content';
+import Base from '~/layouts/Base.astro';
+import ProjectCard from '~/components/ProjectCard.astro';
+
+const all = (await getCollection('projects', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.order - b.data.order);
+
+const order: CollectionEntry<'projects'>['data']['status'][] = [
+  'Ongoing', 'Recruiting', 'Completed', 'Planned', 'Paused',
+];
+const groups = order
+  .map((s) => ({ status: s, items: all.filter((p) => p.data.status === s) }))
+  .filter((g) => g.items.length > 0);
+---
+
+<Base title="Projects" description="Ongoing, recruiting and completed projects from the Orthopaedic Research Group.">
+  <section>
+    <div class="container">
+      <header class="section-header">
+        <p class="eyebrow">Projects</p>
+        <h1>Prospective studies and registries.</h1>
+        <p class="lede">Grouped by status. Click any project for ethics approval references and registry IDs.</p>
+      </header>
+
+      {groups.map((g) => (
+        <section class="project-group">
+          <h2 class="project-group-h">{g.status}</h2>
+          <div class="grid grid-2">
+            {g.items.map((p) => <ProjectCard project={p} />)}
+          </div>
+        </section>
+      ))}
+
+      {groups.length === 0 && (
+        <p class="muted">No projects yet. <!-- TODO --></p>
+      )}
+    </div>
+  </section>
+</Base>
+
+<style>
+  .project-group { margin-bottom: var(--space-6); }
+  .project-group-h {
+    font-size: var(--fs-micro);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-subtle);
+    font-weight: 600;
+    margin: 0 0 var(--space-3);
+  }
+</style>

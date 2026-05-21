@@ -1,0 +1,188 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '~/layouts/Base.astro';
+import Hero from '~/components/Hero.astro';
+import Section from '~/components/Section.astro';
+import Reveal from '~/components/Reveal.astro';
+import MemberCard from '~/components/MemberCard.astro';
+import PublicationItem from '~/components/PublicationItem.astro';
+import ProjectCard from '~/components/ProjectCard.astro';
+import ActivityItem from '~/components/ActivityItem.astro';
+import { getPublications } from '~/utils/publications.ts';
+
+// Members, sorted by `order`.
+const members = (await getCollection('members', ({ data }) => !data.draft))
+  .sort((a, b) => a.data.order - b.data.order);
+const pi = members.find((m) => m.slug === 'n-dimitrov');
+const others = members.filter((m) => m.slug !== 'n-dimitrov');
+
+// Recent publications.
+const pubs = getPublications().slice(0, 5);
+
+// Active projects.
+const projects = (await getCollection('projects', ({ data }) => !data.draft))
+  .filter((p) => p.data.status === 'Ongoing' || p.data.status === 'Recruiting')
+  .sort((a, b) => a.data.order - b.data.order);
+
+// Recent activities.
+const activities = (await getCollection('activities', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
+
+const researchLines = [
+  {
+    title: 'Joint reconstruction',
+    blurb:
+      'Prospective outcomes of primary and revision arthroplasty. Patient-reported outcomes, survival, and complication profiles.',
+  },
+  {
+    title: 'Trauma outcomes',
+    blurb:
+      'Functional recovery, return-to-work, and quality of life after operative fixation of major orthopaedic trauma.',
+  },
+  {
+    title: 'Registry science',
+    blurb:
+      'Methodology, governance, and reporting standards for prospective orthopaedic registries.',
+  },
+];
+
+const description =
+  'Clinical research in orthopaedics and traumatology, led by Prof. N. Dimitrov. Prospective studies, patient-reported outcomes, and open publication.';
+---
+
+<Base title="Home" description={description}>
+  <Hero />
+
+  <Reveal>
+    <Section
+      id="about"
+      eyebrow="About"
+      title="A small group focused on clinical evidence."
+      lede="The Orthopaedic Research Group is a clinically embedded team conducting prospective studies in orthopaedics and traumatology. We publish openly, pre-register protocols where possible, and collaborate across institutions."
+    >
+      <div class="stack about-body">
+        <p>
+          <!-- TODO: PI to refine -->
+          Our work sits at the intersection of routine clinical practice and structured outcomes
+          research. We design protocols that fit into real-world surgical workflows so that the
+          evidence we generate is directly applicable to the patients we treat.
+        </p>
+        <p>
+          We collaborate with colleagues at the Universitätsspital Zürich and other institutions on
+          shared registry work and methodology development.
+        </p>
+      </div>
+    </Section>
+  </Reveal>
+
+  <Reveal>
+    <Section
+      id="research"
+      eyebrow="Research lines"
+      title="What we study."
+      lede="Three areas of focus. Each is driven by prospective data collection and openly published methodology."
+    >
+      <div class="grid grid-3">
+        {researchLines.map((r) => (
+          <article class="card">
+            <h3>{r.title}</h3>
+            <p class="muted" style="margin-top: var(--space-2); font-size: var(--fs-small);">{r.blurb}</p>
+          </article>
+        ))}
+      </div>
+    </Section>
+  </Reveal>
+
+  <Reveal>
+    <Section id="team" eyebrow="Team" title="The people." lede="A focused group, with external collaborators where they bring expertise.">
+      {pi && <div class="spotlight"><MemberCard member={pi} variant="spotlight" /></div>}
+      <div class="grid grid-3 team-grid">
+        {others.map((m) => <MemberCard member={m} />)}
+      </div>
+      <p class="row team-cta">
+        <a class="btn btn-ghost" href="/team/">All team members</a>
+      </p>
+    </Section>
+  </Reveal>
+
+  <Reveal>
+    <Section
+      id="publications"
+      eyebrow="Publications"
+      title="Recent work."
+      lede="The five most recent. Full publication list with search and filters."
+    >
+      <div class="stack pubs-list">
+        {pubs.map((p) => <PublicationItem pub={p} />)}
+      </div>
+      <p class="row team-cta">
+        <a class="btn btn-ghost" href="/publications/">All publications</a>
+      </p>
+    </Section>
+  </Reveal>
+
+  <Reveal>
+    <Section
+      id="projects"
+      eyebrow="Projects"
+      title="Active studies."
+      lede="Ongoing and recruiting clinical projects. See the full list for completed work."
+    >
+      <div class="grid grid-2">
+        {projects.map((p) => <ProjectCard project={p} />)}
+      </div>
+      <p class="row team-cta">
+        <a class="btn btn-ghost" href="/projects/">All projects</a>
+      </p>
+    </Section>
+  </Reveal>
+
+  <Reveal>
+    <Section id="activities" eyebrow="Activities" title="Where we'll be." lede="Recent team activities and upcoming congresses.">
+      <div class="grid grid-3">
+        {activities.map((a) => <ActivityItem activity={a} />)}
+      </div>
+      <p class="row team-cta">
+        <a class="btn btn-ghost" href="/activities/">All activities</a>
+      </p>
+    </Section>
+  </Reveal>
+
+  <Reveal>
+    <Section id="contact" eyebrow="Contact" title="Get in touch." lede="For collaborations, study enquiries, and academic correspondence.">
+      <div class="card contact-card">
+        <address class="contact-address">
+          <!-- TODO: real institutional address -->
+          Orthopaedic Research Group<br />
+          Sofia, Bulgaria
+        </address>
+        <p class="row contact-links">
+          <a class="btn btn-primary" href="mailto:dimitartenev@proton.me">Email the group</a>
+          <a class="btn btn-ghost" href="/contact/">Contact details</a>
+        </p>
+      </div>
+    </Section>
+  </Reveal>
+</Base>
+
+<style>
+  .about-body { max-width: 65ch; }
+  .spotlight { margin-bottom: var(--space-5); }
+  .team-grid { margin-top: var(--space-5); }
+  .team-cta { margin-top: var(--space-5); }
+  .pubs-list { gap: var(--space-2); }
+
+  .contact-card {
+    max-width: 560px;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+  .contact-address {
+    font-style: normal;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+  .contact-links { gap: var(--space-3); }
+</style>

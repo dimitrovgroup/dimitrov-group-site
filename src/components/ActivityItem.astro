@@ -1,0 +1,68 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+type Props = { activity: CollectionEntry<'activities'> };
+const { activity } = Astro.props;
+const d = activity.data;
+
+const dateStr = d.date.toLocaleDateString('en-GB', {
+  year: 'numeric', month: 'long', day: 'numeric',
+});
+---
+
+{d.kind === 'team-activity' && (
+  <article class="activity">
+    <p class="eyebrow">{dateStr}</p>
+    <h3 class="activity-title">{d.title}</h3>
+    {d.location && <p class="muted activity-meta">{d.location}</p>}
+    {d.summary && <p class="activity-body muted">{d.summary}</p>}
+  </article>
+)}
+
+{d.kind === 'congress' && (
+  <article class="activity">
+    <p class="eyebrow">{dateStr}</p>
+    <h3 class="activity-title">{d.title}</h3>
+    {d.location && <p class="muted activity-meta">{d.location}</p>}
+
+    {d.presentation && (
+      <div class="presentation">
+        <p class="presentation-title">{d.presentation.title}</p>
+        <div class="row presentation-meta">
+          <span class="badge badge-accent">{d.presentation.type}</span>
+          {d.presentation.presenter && (
+            <span class="muted">Presenter: {d.presentation.presenter}</span>
+          )}
+        </div>
+      </div>
+    )}
+
+    {d.summary && <p class="activity-body muted">{d.summary}</p>}
+  </article>
+)}
+
+<style>
+  .activity {
+    padding: var(--space-4);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border);
+    background: var(--bg-elevated);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .activity-title { margin: 0; }
+  .activity-meta { margin: 0; font-size: var(--fs-small); }
+  .activity-body { margin: 0; font-size: var(--fs-small); }
+  .presentation {
+    margin-top: var(--space-2);
+    padding: var(--space-3);
+    border-radius: var(--radius-md);
+    background: var(--surface);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+  .presentation-title { font-weight: 600; margin: 0; letter-spacing: -0.01em; }
+  .presentation-meta { gap: var(--space-3); font-size: var(--fs-small); }
+</style>

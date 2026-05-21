@@ -1,0 +1,20 @@
+---
+type Props = {
+  id: string;
+  eyebrow?: string;
+  title: string;
+  lede?: string;
+};
+const { id, eyebrow, title, lede } = Astro.props;
+---
+
+<section id={id}>
+  <div class="container">
+    <header class="section-header">
+      {eyebrow && <p class="eyebrow">{eyebrow}</p>}
+      <h2>{title}</h2>
+      {lede && <p class="lede">{lede}</p>}
+    </header>
+    <slot />
+  </div>
+</section>

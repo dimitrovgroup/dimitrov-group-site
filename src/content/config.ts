@@ -1,0 +1,89 @@
+import { defineCollection, z } from 'astro:content';
+
+/**
+ * Members of the Orthopaedic Research Group.
+ * One markdown file per member at /src/content/members/<slug>.md.
+ * The body of the file becomes the long bio.
+ */
+const members = defineCollection({
+  type: 'content',
+  schema: ({ image }) =>
+    z.object({
+      // Required
+      name: z.string(),
+      role: z.enum([
+        'Principal Investigator',
+        'Senior Researcher',
+        'Fellow',
+        'Resident',
+        'Research Assistant',
+        'Member',
+        'Alumni',
+      ]),
+      order: z.number().default(100), // smaller numbers appear first
+      // Optional
+      title: z.string().optional(), // e.g. "Prof. Dr. med."
+      shortBio: z.string().max(280).optional(),
+      portrait: image().optional(),
+      email: z.string().email().optional(),
+      orcid: z.string().regex(/^\d{4}-\d{4}-\d{4}-\d{3}[0-9X]$/).optional(),
+      affiliation: z.string().optional(),
+      interests: z.array(z.string()).default([]),
+      collaborators: z.array(z.string()).default([]), // slugs of collaborators
+      external: z.boolean().default(false), // true for collaborators (Georgi Enev)
+      draft: z.boolean().default(false),
+    }),
+});
+
+/**
+ * Projects: ongoing and completed prospective studies, registries, clinical trials.
+ */
+const projects = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    status: z.enum(['Ongoing', 'Recruiting', 'Completed', 'Planned', 'Paused']),
+    startYear: z.number().int().min(1990).max(2100),
+    endYear: z.number().int().min(1990).max(2100).optional(),
+    summary: z.string(),
+    ethicsApproval: z.string().optional(), // e.g. "Ethics Cmte UMHAT, ref. 2024-OR-017"
+    registry: z
+      .object({
+        name: z.string(), // e.g. "ClinicalTrials.gov"
+        id: z.string(), // e.g. "NCT0XXXXXXX"
+      })
+      .optional(),
+    members: z.array(z.string()).default([]), // member slugs
+    order: z.number().default(100),
+    draft: z.boolean().default(false),
+  }),
+});
+
+/**
+ * Activities: team activities (TBAs) and congresses.
+ */
+const activities = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    kind: z.enum(['team-activity', 'congress']),
+    date: z.coerce.date(), // YYYY-MM-DD in frontmatter
+    location: z.string().optional(),
+    // Congress-specific
+    presentation: z
+      .object({
+        title: z.string(),
+        type: z.enum(['Oral', 'Poster', 'Invited lecture', 'Keynote', 'Symposium']),
+        presenter: z.string().optional(), // member slug
+      })
+      .optional(),
+    summary: z.string().optional(),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = {
+  members,
+  projects,
+  activities,
+};
