@@ -33,19 +33,22 @@ const activities = (await getCollection('activities', ({ data }) => !data.draft)
 
 const researchLines = [
   {
-    title: 'Joint reconstruction',
-    blurb:
-      'Prospective outcomes of primary and revision arthroplasty. Patient-reported outcomes, survival, and complication profiles.',
+    title: 'Arthroplasty',
+    blurb: 'Prospective outcomes after primary and revision hip and knee arthroplasty.',
   },
   {
-    title: 'Trauma outcomes',
+    title: 'Arthroscopy',
     blurb:
-      'Functional recovery, return-to-work, and quality of life after operative fixation of major orthopaedic trauma.',
+      'Outcomes of arthroscopic procedures across joints, with structured pre- and post-operative measurement.',
   },
   {
     title: 'Registry science',
+    blurb: 'Methodology and governance of prospective clinical registries in orthopaedics.',
+  },
+  {
+    title: 'Interdisciplinary studies',
     blurb:
-      'Methodology, governance, and reporting standards for prospective orthopaedic registries.',
+      'Collaborative research at the intersection of orthopaedics and adjacent specialties — psychiatry, rehabilitation, and beyond.',
   },
 ];
 
@@ -64,16 +67,7 @@ const description =
       lede="The Orthopaedic Research Group is a clinically embedded team conducting prospective studies in orthopaedics and traumatology. We publish openly, pre-register protocols where possible, and collaborate across institutions."
     >
       <div class="stack about-body">
-        <p>
-          <!-- TODO: PI to refine -->
-          Our work sits at the intersection of routine clinical practice and structured outcomes
-          research. We design protocols that fit into real-world surgical workflows so that the
-          evidence we generate is directly applicable to the patients we treat.
-        </p>
-        <p>
-          We collaborate with colleagues at the Universitätsspital Zürich and other institutions on
-          shared registry work and methodology development.
-        </p>
+        <p>We focus on clinical orthopedic research and data collection of stationary interventions.</p>
       </div>
     </Section>
   </Reveal>
@@ -85,7 +79,7 @@ const description =
       title="What we study."
       lede="Three areas of focus. Each is driven by prospective data collection and openly published methodology."
     >
-      <div class="grid grid-3">
+      <div class="grid grid-4">
         {researchLines.map((r) => (
           <article class="card">
             <h3>{r.title}</h3>
@@ -129,7 +123,7 @@ const description =
       id="projects"
       eyebrow="Projects"
       title="Active studies."
-      lede="Ongoing and recruiting clinical projects. See the full list for completed work."
+      lede="Active prospective studies."
     >
       <div class="grid grid-2">
         {projects.map((p) => <ProjectCard project={p} />)}
