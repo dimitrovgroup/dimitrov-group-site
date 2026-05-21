@@ -1,5 +1,5 @@
 ---
-name: "Nikolai Cherkezov, MD"
+name: "Nikolay Cherkezov, MD"
 role: "PhD Student"
 order: 10
 affiliation: "Department of Orthopaedics, Medical University of Sofia · USBALO \"Prof. Boycho Boychev\", Sofia, Bulgaria"
@@ -8,4 +8,4 @@ interests: []
 collaborators: []
 ---
 
-Nikolai Cherkezov (Николай Черкезов) is a medical doctor at USBALO "Prof. Boycho Boychev" in Sofia and a PhD student in the group. He oversees the methodology of the group's published work, including systematic reviews and meta-analyses.
+Nikolay Cherkezov (Николай Черкезов) is a medical doctor at USBALO "Prof. Boycho Boychev" in Sofia and a PhD student in the group. He oversees the methodology of the group's published work, including systematic reviews and meta-analyses.
