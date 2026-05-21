@@ -16,6 +16,8 @@ const members = (await getCollection('members', ({ data }) => !data.draft))
   .sort((a, b) => a.data.order - b.data.order);
 const pi = members.find((m) => m.slug === 'n-dimitrov');
 const others = members.filter((m) => m.slug !== 'n-dimitrov');
+const otherInternal = others.filter((m) => !m.data.external);
+const collaborators = others.filter((m) =>  m.data.external);
 const PiContent = pi ? (await pi.render()).Content : null;
 
 // Recent publications.
@@ -114,9 +116,20 @@ const description =
         </div>
       )}
 
+      <h3 class="team-subhead">Members</h3>
       <div class="grid grid-3 team-grid">
-        {others.map((m) => <MemberCard member={m} />)}
+        {otherInternal.map((m) => <MemberCard member={m} />)}
       </div>
+
+      {collaborators.length > 0 && (
+        <>
+          <h3 class="team-subhead">Collaborators</h3>
+          <div class="grid grid-3 team-grid">
+            {collaborators.map((m) => <MemberCard member={m} />)}
+          </div>
+        </>
+      )}
+
       <p class="row team-cta">
         <a class="btn btn-ghost" href="/team/">All team members</a>
       </p>

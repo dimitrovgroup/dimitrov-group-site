@@ -314,6 +314,29 @@ section.section-tight { padding-block: var(--space-6); }
 :root[data-theme='dark'] .badge-recruiting { color: #f0b86c; }
 :root[data-theme='dark'] .badge-planned    { color: #7fb5f0; }
 
+/* ----- Team subheadings + responsive badge ---------------- */
+/* Used on the home Team section and on /team/. Desktop shows subheadings
+   ("Members" / "Collaborators") to group cards; mobile hides them and
+   relies on the per-card "Collaborator" badge instead. */
+.team-subhead {
+  display: none;
+  margin: var(--space-6) 0 var(--space-4);
+  font-size: var(--fs-micro);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-subtle);
+  font-weight: 600;
+}
+@media (min-width: 768px) {
+  .team-subhead { display: block; }
+}
+.member-card-head .badge {
+  display: inline-flex;
+}
+@media (min-width: 768px) {
+  .member-card-head .badge { display: none; }
+}
+
 /* ----- Scroll-in motion ----------------------------------- */
 
 .reveal {
