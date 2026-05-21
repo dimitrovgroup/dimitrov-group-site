@@ -40,16 +40,18 @@
 
   /* The group name dominates. */
   .hero-title {
-    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-size: clamp(2.75rem, 7.5vw, 5.5rem);
     font-weight: 600;
     letter-spacing: -0.03em;
     line-height: 1.02;
     margin: 0;
     color: var(--text);
+    /* Allow natural wrapping; the container caps width so it breaks
+       to a second line on tablet, stays single line on wide desktop. */
+    max-width: 14ch;
   }
-  @media (min-width: 1280px) {
-    /* Keep on one line on wide desktop. */
-    .hero-title { white-space: nowrap; }
+  @media (min-width: 1024px) {
+    .hero-title { max-width: none; }
   }
 
   /* Everything else recedes. */
