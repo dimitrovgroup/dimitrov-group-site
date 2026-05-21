@@ -110,9 +110,16 @@ const allJsonLd = jsonLd ? [orgJsonLd, jsonLd] : [orgJsonLd];
     </style>
 
     <script>
-      // Gentle fade-and-rise reveal.
-      const els = document.querySelectorAll<HTMLElement>('.reveal');
-      if ('IntersectionObserver' in window && els.length > 0) {
+      // Gentle fade-and-rise reveal. Runs on initial load AND after every
+      // Astro view transition (so .reveal elements on transitioned pages
+      // also get observed — otherwise they'd stay at opacity:0 forever).
+      function setupReveal() {
+        const els = document.querySelectorAll<HTMLElement>('.reveal:not(.is-visible)');
+        if (els.length === 0) return;
+        if (!('IntersectionObserver' in window)) {
+          els.forEach((el) => el.classList.add('is-visible'));
+          return;
+        }
         const io = new IntersectionObserver(
           (entries) => {
             for (const e of entries) {
@@ -125,10 +132,9 @@ const allJsonLd = jsonLd ? [orgJsonLd, jsonLd] : [orgJsonLd];
           { rootMargin: '0px 0px -8% 0px', threshold: 0.05 },
         );
         els.forEach((el) => io.observe(el));
-      } else {
-        // No IO: just reveal immediately.
-        els.forEach((el) => el.classList.add('is-visible'));
       }
+      setupReveal();
+      document.addEventListener('astro:page-load', setupReveal);
     </script>
   </body>
 </html>
