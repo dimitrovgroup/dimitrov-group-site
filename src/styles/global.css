@@ -296,15 +296,25 @@ section.section-tight { padding-block: var(--space-6); }
 
 .reveal {
   opacity: 0;
-  transform: translateY(12px);
-  transition: opacity var(--dur-slow) var(--ease),
-              transform var(--dur-slow) var(--ease);
+  transform: translateY(20px);
+  transition: opacity 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              transform 500ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  transition-delay: calc(var(--i, 0) * 80ms);
   will-change: opacity, transform;
 }
 .reveal.is-visible {
   opacity: 1;
-  transform: translateY(0);
+  transform: none;
 }
+/* Auto-stagger cards within grids and stacks (up to 8 children). */
+.grid > .reveal:nth-child(1), .stack > .reveal:nth-child(1) { --i: 0; }
+.grid > .reveal:nth-child(2), .stack > .reveal:nth-child(2) { --i: 1; }
+.grid > .reveal:nth-child(3), .stack > .reveal:nth-child(3) { --i: 2; }
+.grid > .reveal:nth-child(4), .stack > .reveal:nth-child(4) { --i: 3; }
+.grid > .reveal:nth-child(5), .stack > .reveal:nth-child(5) { --i: 4; }
+.grid > .reveal:nth-child(6), .stack > .reveal:nth-child(6) { --i: 5; }
+.grid > .reveal:nth-child(7), .stack > .reveal:nth-child(7) { --i: 6; }
+.grid > .reveal:nth-child(8), .stack > .reveal:nth-child(8) { --i: 7; }
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
 }

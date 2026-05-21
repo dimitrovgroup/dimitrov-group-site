@@ -22,7 +22,7 @@ if (d.presentation?.presenter) {
 ---
 
 {d.kind === 'team-activity' && (
-  <article class="activity">
+  <article class="activity reveal">
     <p class="eyebrow">{dateStr}</p>
     <h3 class="activity-title">{d.title}</h3>
     {d.location && <p class="muted activity-meta">{d.location}</p>}
@@ -38,7 +38,7 @@ if (d.presentation?.presenter) {
 )}
 
 {d.kind === 'congress' && (
-  <article class="activity">
+  <article class="activity reveal">
     <p class="eyebrow">{dateStr}</p>
     <h3 class="activity-title">{d.title}</h3>
     {d.location && <p class="muted activity-meta">{d.location}</p>}
