@@ -11,7 +11,7 @@ const { member, variant = 'default' } = Astro.props;
 const d = member.data;
 ---
 
-<article class={`card member-card reveal ${variant === 'spotlight' ? 'is-spotlight' : ''}`}>
+<article class={`card card-hover member-card reveal ${variant === 'spotlight' ? 'is-spotlight' : ''}`}>
   <div class="member-card-inner">
     <Avatar
       name={d.name}
