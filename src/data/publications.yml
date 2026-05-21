@@ -1,68 +1,165 @@
-# Placeholder publications. Replace with the real list.
+# Publications for the Orthopaedic Research Group — Prof. N. Dimitrov.
+# Ingested from PubMed (NCBI E-utils). Each entry maps real PMIDs to internal member IDs.
+#
 # To add a publication, copy any block below, paste at the top, edit the fields.
-# - pmid: PubMed ID (digits only)
-# - doi:  full DOI string, e.g. 10.1007/s00264-024-06000-0
-# - members: list of member slugs from /src/content/members/
+# - pmid:        PubMed ID (digits only)
+# - doi:         full DOI string, e.g. 10.1007/s00264-024-06000-0
+# - members:     list of member slugs from /src/content/members/
 # - seniorAuthor: true if a group member is the senior (last) author
 
-- id: "placeholder-2025-registry"
-  title: "Two-year outcomes of a prospective registry for primary total knee arthroplasty: a multicentre cohort"
+- id: "adolf-2026-tha-obesity-navigation"
+  title: "Rising adoption of imageless navigation in total hip arthroplasty for morbid obesity: do clinical outcomes improve? A matched cohort study"
   authors:
-    - "Cherkezov N."
-    - "Tenev D."
-    - "Enev G."
-    - "Dimitrov N."
-  journal: "Journal of Orthopaedic Research"
-  year: 2025
-  pmid: "00000001"
-  doi: "10.0000/example.0001"
+    - "Latifi R"
+    - "Parker J"
+    - "Hoveidaei AH"
+    - "Salmannezhad A"
+    - "Chen Z"
+    - "Adolf J"
+    - "Thakral R"
+    - "Conway JD"
+  journal: "International orthopaedics"
+  year: 2026
+  pmid: "42118304"
+  doi: "10.1007/s00264-026-06834-y"
   members:
-    - "n-cherkezov"
-    - "d-tenev"
-    - "g-enev"
-    - "n-dimitrov"
-  seniorAuthor: true
-  abstract: "Placeholder abstract. Replace with the published abstract."
-
-- id: "placeholder-2024-trauma"
-  title: "Functional recovery after operative fixation of complex tibial plateau fractures: a prospective single-centre study"
-  authors:
-    - "Tenev D."
-    - "Dimitrov N."
-  journal: "International Orthopaedics"
-  year: 2024
-  pmid: "00000002"
-  doi: "10.0000/example.0002"
-  members:
-    - "d-tenev"
-    - "n-dimitrov"
-  seniorAuthor: true
-
-- id: "placeholder-2024-hip"
-  title: "Patient-reported outcomes after primary total hip arthroplasty in patients under 50: a five-year follow-up"
-  authors:
-    - "Enev G."
-    - "Cherkezov N."
-    - "Dimitrov N."
-  journal: "Bone & Joint Journal"
-  year: 2024
-  pmid: "00000003"
-  doi: "10.0000/example.0003"
-  members:
-    - "g-enev"
-    - "n-cherkezov"
-    - "n-dimitrov"
-  seniorAuthor: true
-
-- id: "placeholder-2023-methods"
-  title: "Methodological considerations for prospective orthopaedic registries in resource-limited settings"
-  authors:
-    - "Dimitrov N."
-    - "Cherkezov N."
-  journal: "Acta Orthopaedica"
-  year: 2023
-  doi: "10.0000/example.0004"
-  members:
-    - "n-dimitrov"
-    - "n-cherkezov"
+    - "j-adolf"
   seniorAuthor: false
+
+- id: "dimitrov-2026-bulgarian-sst-ases"
+  title: "Bulgarian Translation, Cross-Cultural Adaptation, and Validation of the Simple Shoulder Test and the American Shoulder and Elbow Surgeons Shoulder Assessment Form"
+  authors:
+    - "Cherkezov N"
+    - "Iliev A"
+    - "Kovacheva-Predovska D"
+    - "Dimitrov N"
+  journal: "Cureus"
+  year: 2026
+  pmid: "42078237"
+  doi: "10.7759/cureus.106313"
+  members:
+    - "n-cherkezov"
+    - "n-dimitrov"
+  seniorAuthor: true
+
+- id: "adolf-2026-sports-trauma-editorial"
+  title: "Editorial: Epidemiology of orthopaedic sports trauma and injuries"
+  authors:
+    - "Hoveidaei AH"
+    - "Parker J"
+    - "Razi M"
+    - "Ritzmann R"
+    - "Adolf J"
+    - "Tabaie SA"
+  journal: "Frontiers in sports and active living"
+  year: 2026
+  pmid: "41983082"
+  doi: "10.3389/fspor.2026.1818539"
+  members:
+    - "j-adolf"
+  seniorAuthor: false
+
+- id: "adolf-2026-osteomyelitis-genomics"
+  title: "From Bench to Bedside: Personalized Genomics in the Diagnosis and Treatment of Osteomyelitis"
+  authors:
+    - "Hoveidaei AH"
+    - "Rahimzadeh A"
+    - "Mohammadi S"
+    - "Thota P"
+    - "Vakili K"
+    - "Yazdanpanahi P"
+    - "Homaei A"
+    - "Mosalamiaghili SA"
+    - "Adolf J"
+    - "Conway JD"
+  journal: "Antibiotics (Basel, Switzerland)"
+  year: 2026
+  pmid: "41750507"
+  doi: "10.3390/antibiotics15020210"
+  members:
+    - "j-adolf"
+  seniorAuthor: false
+
+- id: "adolf-2026-septic-knee-revision"
+  title: "Is Septic Revision Knee Arthroplasty Associated With Higher Thromboembolic Events? A Matched Cohort Study"
+  authors:
+    - "Hoveidaei AH"
+    - "Pirahesh K"
+    - "Over D"
+    - "Reich J"
+    - "Suresh S"
+    - "Adolf J"
+    - "Conway JD"
+  journal: "The Journal of arthroplasty"
+  year: 2026
+  pmid: "41506407"
+  doi: "10.1016/j.arth.2026.01.009"
+  members:
+    - "j-adolf"
+  seniorAuthor: false
+
+- id: "dimitrov-2024-rotator-cuff-epinephrine"
+  title: "Portal-site epinephrine injections improve visualisation in arthroscopic rotator cuff repair"
+  authors:
+    - "Tsenkov T"
+    - "Tzoneva D"
+    - "Dimitrov N"
+  journal: "Journal of ISAKOS : joint disorders & orthopaedic sports medicine"
+  year: 2024
+  pmid: "38218453"
+  doi: "10.1016/j.jisako.2024.01.007"
+  members:
+    - "n-dimitrov"
+  seniorAuthor: true
+
+- id: "dimitrov-2024-lucl-reconstruction"
+  title: "Lateral ulnar collateral ligament reconstruction enhancing secondary stabilizers in chronic PLRI of the elbow provides good to excellent clinical results with no recurrent instability"
+  authors:
+    - "Dimitrov N"
+    - "Tsenkov T"
+  journal: "Journal of orthopaedic science : official journal of the Japanese Orthopaedic Association"
+  year: 2024
+  pmid: "38044214"
+  doi: "10.1016/j.jos.2023.11.013"
+  members:
+    - "n-dimitrov"
+  seniorAuthor: false
+
+- id: "dimitrov-2023-elbow-ecrb-resection"
+  title: "Arthroscopic Extensor Carpi Radialis Brevis Muscle Resection for Chronic Elbow Lateral Epicondylitis"
+  authors:
+    - "Tsenkov T"
+    - "Dimitrov N"
+  journal: "Arthroscopy techniques"
+  year: 2023
+  pmid: "38094944"
+  doi: "10.1016/j.eats.2023.07.017"
+  members:
+    - "n-dimitrov"
+  seniorAuthor: true
+
+- id: "dimitrov-2022-elbow-arthroscopy-review"
+  title: "A systematic review of elbow arthroscopy complications : Complications, risk factors, and safety tips"
+  authors:
+    - "Tsenkov T"
+    - "Dimitrov N"
+  journal: "International orthopaedics"
+  year: 2022
+  pmid: "35106672"
+  doi: "10.1007/s00264-022-05320-5"
+  members:
+    - "n-dimitrov"
+  seniorAuthor: true
+
+- id: "dimitrov-2021-web-space-contracture-flap"
+  title: "A Challenging Case of Using Manta Ray Skin Flaps in a Severe Post-Traumatic First Web Space Contracture"
+  authors:
+    - "Tsenkov T"
+    - "Dimitrov N"
+  journal: "The American journal of case reports"
+  year: 2021
+  pmid: "34663779"
+  doi: "10.12659/AJCR.933907"
+  members:
+    - "n-dimitrov"
+  seniorAuthor: true
