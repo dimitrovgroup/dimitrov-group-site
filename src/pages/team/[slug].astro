@@ -62,7 +62,7 @@ const description = d.shortBio ?? `${d.name}, ${d.role}, Orthopaedic Research Gr
           transitionName={`avatar-${member.slug}`}
         />
         <div class="member-head-text">
-          <p class="eyebrow">{d.role}{d.external && ' · External collaborator'}</p>
+          <p class="eyebrow">{d.external ? 'External collaborator' : d.role}</p>
           <h1>{d.name}</h1>
           {d.title && <p class="muted">{d.title}</p>}
           {d.affiliation && <p class="muted">{d.affiliation}</p>}
