@@ -1,13 +1,24 @@
 ---
-import type { CollectionEntry } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
 
 type Props = { activity: CollectionEntry<'activities'> };
 const { activity } = Astro.props;
 const d = activity.data;
 
-const dateStr = d.date.toLocaleDateString('en-GB', {
-  year: 'numeric', month: 'long', day: 'numeric',
-});
+// Prefer the explicit override, otherwise format the date.
+const dateStr =
+  d.dateDisplay ??
+  d.date.toLocaleDateString('en-GB', {
+    year: 'numeric', month: 'long', day: 'numeric',
+  });
+
+// Resolve presenter slug → display name (if a congress with presenter set).
+let presenterName: string | null = null;
+if (d.presentation?.presenter) {
+  const members = await getCollection('members');
+  const m = members.find((mb) => mb.slug === d.presentation!.presenter);
+  presenterName = m ? m.data.name : d.presentation.presenter;
+}
 ---
 
 {d.kind === 'team-activity' && (
@@ -16,6 +27,13 @@ const dateStr = d.date.toLocaleDateString('en-GB', {
     <h3 class="activity-title">{d.title}</h3>
     {d.location && <p class="muted activity-meta">{d.location}</p>}
     {d.summary && <p class="activity-body muted">{d.summary}</p>}
+    {d.url && (
+      <p class="activity-link">
+        <a class="text-link" href={d.url} target="_blank" rel="noopener">
+          Event page <span aria-hidden="true">&#8599;</span>
+        </a>
+      </p>
+    )}
   </article>
 )}
 
@@ -30,14 +48,22 @@ const dateStr = d.date.toLocaleDateString('en-GB', {
         <p class="presentation-title">{d.presentation.title}</p>
         <div class="row presentation-meta">
           <span class="badge badge-accent">{d.presentation.type}</span>
-          {d.presentation.presenter && (
-            <span class="muted">Presenter: {d.presentation.presenter}</span>
+          {presenterName && (
+            <span class="muted">Presenter: {presenterName}</span>
           )}
         </div>
       </div>
     )}
 
     {d.summary && <p class="activity-body muted">{d.summary}</p>}
+
+    {d.url && (
+      <p class="activity-link">
+        <a class="text-link" href={d.url} target="_blank" rel="noopener">
+          Conference website <span aria-hidden="true">&#8599;</span>
+        </a>
+      </p>
+    )}
   </article>
 )}
 
@@ -54,6 +80,7 @@ const dateStr = d.date.toLocaleDateString('en-GB', {
   .activity-title { margin: 0; }
   .activity-meta { margin: 0; font-size: var(--fs-small); }
   .activity-body { margin: 0; font-size: var(--fs-small); }
+  .activity-link { margin: var(--space-2) 0 0; font-size: var(--fs-small); }
   .presentation {
     margin-top: var(--space-2);
     padding: var(--space-3);

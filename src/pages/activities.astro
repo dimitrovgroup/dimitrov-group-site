@@ -3,14 +3,16 @@ import { getCollection } from 'astro:content';
 import Base from '~/layouts/Base.astro';
 import ActivityItem from '~/components/ActivityItem.astro';
 
-const all = (await getCollection('activities', ({ data }) => !data.draft))
+// Only upcoming activities. Sorted by date desc (furthest-future first); change
+// the comparator below if you'd rather see soonest-first.
+const all = (await getCollection('activities', ({ data }) => !data.draft && data.status === 'upcoming'))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
 
-const team    = all.filter((a) => a.data.kind === 'team-activity');
+const team       = all.filter((a) => a.data.kind === 'team-activity');
 const congresses = all.filter((a) => a.data.kind === 'congress');
 ---
 
-<Base title="Activities" description="Team activities and congress presentations from the Orthopaedic Research Group.">
+<Base title="Activities" description="Team activities and congress contributions from the Orthopaedic Research Group.">
   <section>
     <div class="container">
       <header class="section-header">
@@ -19,25 +21,27 @@ const congresses = all.filter((a) => a.data.kind === 'congress');
         <p class="lede">Team activities and congress contributions.</p>
       </header>
 
-      {team.length > 0 && (
-        <section class="act-group">
-          <h2 class="act-group-h">Team activities</h2>
+      <section class="act-group">
+        <h2 class="act-group-h">Team activities</h2>
+        {team.length > 0 ? (
           <div class="grid grid-2">
             {team.map((a) => <ActivityItem activity={a} />)}
           </div>
-        </section>
-      )}
+        ) : (
+          <p class="muted">No upcoming team activities.</p>
+        )}
+      </section>
 
-      {congresses.length > 0 && (
-        <section class="act-group">
-          <h2 class="act-group-h">Congresses</h2>
+      <section class="act-group">
+        <h2 class="act-group-h">Congresses</h2>
+        {congresses.length > 0 ? (
           <div class="grid grid-2">
             {congresses.map((a) => <ActivityItem activity={a} />)}
           </div>
-        </section>
-      )}
-
-      {all.length === 0 && <p class="muted">No activities yet.</p>}
+        ) : (
+          <p class="muted">No upcoming congresses.</p>
+        )}
+      </section>
     </div>
   </section>
 </Base>

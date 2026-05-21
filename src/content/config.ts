@@ -74,9 +74,13 @@ const activities = defineCollection({
   type: 'content',
   schema: z.object({
     title: z.string(),
+    title_bg: z.string().optional(), // optional Bulgarian title (not currently rendered)
     kind: z.enum(['team-activity', 'congress']),
-    date: z.coerce.date(), // YYYY-MM-DD in frontmatter
+    date: z.coerce.date(), // YYYY-MM-DD in frontmatter — used for sorting
+    dateDisplay: z.string().optional(), // override rendered date string (e.g. "September 2026", "29–31 October 2026")
+    status: z.enum(['upcoming', 'past']).default('upcoming'),
     location: z.string().optional(),
+    url: z.string().url().optional(), // external link to the event page
     // Congress-specific
     presentation: z
       .object({
