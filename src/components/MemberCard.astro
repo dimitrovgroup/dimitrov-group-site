@@ -9,10 +9,9 @@ type Props = {
 
 const { member, variant = 'default' } = Astro.props;
 const d = member.data;
-const href = `/team/${member.slug}/`;
 ---
 
-<article class={`card card-hover member-card ${variant === 'spotlight' ? 'is-spotlight' : ''}`}>
+<article class={`card member-card ${variant === 'spotlight' ? 'is-spotlight' : ''}`}>
   <div class="member-card-inner">
     <Avatar name={d.name} initials={d.initials} src={d.portrait} size={variant === 'spotlight' ? 128 : 96} />
     <div class="member-card-body">
@@ -22,9 +21,6 @@ const href = `/team/${member.slug}/`;
       </div>
       <p class="eyebrow">{d.role}</p>
       {d.shortBio && <p class="muted member-card-bio">{d.shortBio}</p>}
-      <a class="member-card-link" href={href} aria-label={`View profile of ${d.name}`}>
-        Profile <span aria-hidden="true">&rarr;</span>
-      </a>
     </div>
   </div>
 </article>
@@ -54,16 +50,4 @@ const href = `/team/${member.slug}/`;
     flex-wrap: wrap;
   }
   .member-card-bio { margin: 0; font-size: var(--fs-small); }
-  .member-card-link {
-    margin-top: var(--space-2);
-    color: var(--accent-ink);
-    font-weight: 500;
-    font-size: var(--fs-small);
-    min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-    transition: gap var(--dur) var(--ease);
-    gap: 6px;
-  }
-  .member-card-link:hover { gap: 10px; }
 </style>
