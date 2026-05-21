@@ -14,6 +14,7 @@ const members = defineCollection({
       role: z.enum([
         'Principal Investigator',
         'Senior Researcher',
+        'Assistant Professor & PhD Student',
         'PhD Student',
         'Group Member',
         'Fellow',
