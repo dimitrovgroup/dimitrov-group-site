@@ -29,28 +29,20 @@ if (d.leadMember) {
     <p class="project-lead subtle">Lead: {leadName}</p>
   )}
 
-  {(d.ethicsApproval || d.registry) && (
+  {d.registry && (
     <footer class="project-foot row">
-      {d.ethicsApproval && (
-        <span class="project-ethics" title="Ethics approval">
-          <span class="visually-hidden">Ethics approval: </span>
-          {d.ethicsApproval}
-        </span>
-      )}
-      {d.registry && (
-        <a
-          class="project-registry"
-          href={
-            d.registry.name === 'ClinicalTrials.gov'
-              ? `https://clinicaltrials.gov/study/${d.registry.id}`
-              : `https://www.google.com/search?q=${encodeURIComponent(`${d.registry.name} ${d.registry.id}`)}`
-          }
-          target="_blank"
-          rel="noopener"
-        >
-          {d.registry.name}: {d.registry.id} <span aria-hidden="true">&#8599;</span>
-        </a>
-      )}
+      <a
+        class="project-registry"
+        href={
+          d.registry.name === 'ClinicalTrials.gov'
+            ? `https://clinicaltrials.gov/study/${d.registry.id}`
+            : `https://www.google.com/search?q=${encodeURIComponent(`${d.registry.name} ${d.registry.id}`)}`
+        }
+        target="_blank"
+        rel="noopener"
+      >
+        {d.registry.name}: {d.registry.id} <span aria-hidden="true">&#8599;</span>
+      </a>
     </footer>
   )}
 </article>
@@ -76,10 +68,6 @@ if (d.leadMember) {
     border-top: 1px solid var(--border);
     font-size: var(--fs-micro);
     gap: var(--space-4);
-  }
-  .project-ethics {
-    font-family: var(--font-mono);
-    color: var(--text-muted);
   }
   .project-registry {
     color: var(--accent-ink);
