@@ -10,6 +10,7 @@ export type Publication = {
   journal: string;
   year: number;
   pmid?: string;
+  pubdate?: string;
   doi?: string;
   members: string[];
   seniorAuthor: boolean;
@@ -22,8 +23,11 @@ function load(): Publication[] {
   if (cached) return cached;
   const parsed = yaml.load(publicationsYaml) as Publication[] | null;
   const list = Array.isArray(parsed) ? parsed : [];
-  // Sort desc by year, then by title for stable order.
+  // Sort desc by pubdate (year + month/day). Fall back to year then title.
   cached = [...list].sort((a, b) => {
+    if (a.pubdate && b.pubdate && a.pubdate !== b.pubdate) {
+      return b.pubdate.localeCompare(a.pubdate);
+    }
     if (b.year !== a.year) return b.year - a.year;
     return a.title.localeCompare(b.title);
   });

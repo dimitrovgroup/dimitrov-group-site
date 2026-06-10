@@ -19,6 +19,7 @@
     - "Conway JD"
   journal: "The Journal of arthroplasty"
   year: 2026
+  pubdate: "2026-06-03"
   pmid: "42242569"
   doi: "10.1016/j.arth.2026.05.070"
   members:
@@ -37,6 +38,7 @@
     - "Conway JD"
   journal: "International orthopaedics"
   year: 2026
+  pubdate: "2026-05-12"
   pmid: "42118304"
   doi: "10.1007/s00264-026-06834-y"
   members:
@@ -52,6 +54,7 @@
     - "Dimitrov N"
   journal: "Cureus"
   year: 2026
+  pubdate: "2026-04-02"
   pmid: "42078237"
   doi: "10.7759/cureus.106313"
   members:
@@ -70,6 +73,7 @@
     - "Tabaie SA"
   journal: "Frontiers in sports and active living"
   year: 2026
+  pubdate: "2026-03-30"
   pmid: "41983082"
   doi: "10.3389/fspor.2026.1818539"
   members:
@@ -91,6 +95,7 @@
     - "Conway JD"
   journal: "Antibiotics (Basel, Switzerland)"
   year: 2026
+  pubdate: "2026-02-14"
   pmid: "41750507"
   doi: "10.3390/antibiotics15020210"
   members:
@@ -109,6 +114,7 @@
     - "Conway JD"
   journal: "The Journal of arthroplasty"
   year: 2026
+  pubdate: "2026-01-06"
   pmid: "41506407"
   doi: "10.1016/j.arth.2026.01.009"
   members:
@@ -128,6 +134,7 @@
     - "Conway JD"
   journal: "The Journal of arthroplasty"
   year: 2026
+  pubdate: "2026-04-01"
   pmid: "40825487"
   doi: "10.1016/j.arth.2025.08.020"
   members:
@@ -148,6 +155,7 @@
     - "Conway JD"
   journal: "The Journal of arthroplasty"
   year: 2026
+  pubdate: "2026-03-01"
   pmid: "40639450"
   doi: "10.1016/j.arth.2025.07.002"
   members:
@@ -166,6 +174,7 @@
     - "Tabaie S"
   journal: "Archives of orthopaedic and trauma surgery"
   year: 2025
+  pubdate: "2025-12-26"
   pmid: "41452484"
   doi: "10.1007/s00402-025-06141-y"
   members:
@@ -184,6 +193,7 @@
     - "Conway JD"
   journal: "Archives of orthopaedic and trauma surgery"
   year: 2025
+  pubdate: "2025-08-20"
   pmid: "40833608"
   doi: "10.1007/s00402-025-06028-y"
   members:
@@ -201,6 +211,7 @@
     - "Conway J"
   journal: "Injury"
   year: 2025
+  pubdate: "2025-07-01"
   pmid: "40328080"
   doi: "10.1016/j.injury.2025.112361"
   members:
@@ -220,6 +231,7 @@
     - "Citak M"
   journal: "Archives of orthopaedic and trauma surgery"
   year: 2024
+  pubdate: "2024-12-16"
   pmid: "39680211"
   doi: "10.1007/s00402-024-05691-x"
   members:
@@ -235,6 +247,7 @@
     - "Citak M"
   journal: "Archives of orthopaedic and trauma surgery"
   year: 2024
+  pubdate: "2024-12-01"
   pmid: "38393443"
   doi: "10.1007/s00402-024-05217-5"
   members:
@@ -249,6 +262,7 @@
     - "Dimitrov N"
   journal: "Journal of ISAKOS : joint disorders & orthopaedic sports medicine"
   year: 2024
+  pubdate: "2024-06-01"
   pmid: "38218453"
   doi: "10.1016/j.jisako.2024.01.007"
   members:
@@ -262,6 +276,7 @@
     - "Tsenkov T"
   journal: "Journal of orthopaedic science : official journal of the Japanese Orthopaedic Association"
   year: 2024
+  pubdate: "2024-11-01"
   pmid: "38044214"
   doi: "10.1016/j.jos.2023.11.013"
   members:
@@ -275,6 +290,7 @@
     - "Adolf J"
   journal: "Joint diseases and related surgery"
   year: 2023
+  pubdate: "2023-09-16"
   pmid: "37750256"
   doi: "10.52312/jdrs.2023.1296"
   members:
@@ -287,6 +303,7 @@
     - "Dimitrov N"
   journal: "Arthroscopy techniques"
   year: 2023
+  pubdate: "2023-10-16"
   pmid: "38094944"
   doi: "10.1016/j.eats.2023.07.017"
   members:
@@ -300,6 +317,7 @@
     - "Dimitrov N"
   journal: "International orthopaedics"
   year: 2022
+  pubdate: "2022-05-01"
   pmid: "35106672"
   doi: "10.1007/s00264-022-05320-5"
   members:
@@ -313,6 +331,7 @@
     - "Dimitrov N"
   journal: "The American journal of case reports"
   year: 2021
+  pubdate: "2021-10-19"
   pmid: "34663779"
   doi: "10.12659/AJCR.933907"
   members:
