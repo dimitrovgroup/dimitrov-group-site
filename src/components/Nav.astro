@@ -219,22 +219,6 @@ function isActive(href: string): boolean {
 </style>
 
 <script>
-  // Scroll-aware nav.
-  const nav = document.getElementById('site-nav');
-  if (nav) {
-    const onScroll = () => {
-      if (window.scrollY > 8) nav.classList.add('is-scrolled');
-      else nav.classList.remove('is-scrolled');
-    };
-    onScroll();
-    window.addEventListener('scroll', onScroll, { passive: true });
-  }
-
-  // Mobile sheet with focus trap.
-  const toggle = document.getElementById('nav-toggle');
-  const sheet  = document.getElementById('nav-sheet');
-  const close  = document.getElementById('nav-close');
-
   function getFocusables(root: HTMLElement): HTMLElement[] {
     return Array.from(
       root.querySelectorAll<HTMLElement>(
@@ -244,46 +228,89 @@ function isActive(href: string): boolean {
   }
 
   let lastFocused: HTMLElement | null = null;
+  let escListenerInstalled = false;
 
-  function openSheet() {
-    if (!sheet || !toggle) return;
-    lastFocused = document.activeElement as HTMLElement | null;
-    sheet.classList.add('is-open');
-    sheet.setAttribute('aria-hidden', 'false');
-    toggle.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
-    const first = getFocusables(sheet)[0];
-    first?.focus();
-  }
-  function closeSheet() {
-    if (!sheet || !toggle) return;
-    sheet.classList.remove('is-open');
-    sheet.setAttribute('aria-hidden', 'true');
-    toggle.setAttribute('aria-expanded', 'false');
+  function initNav() {
+    // Scroll-aware nav.
+    const nav = document.getElementById('site-nav');
+    if (nav && nav.dataset.navScrollReady !== '1') {
+      nav.dataset.navScrollReady = '1';
+      const onScroll = () => {
+        if (window.scrollY > 8) nav.classList.add('is-scrolled');
+        else nav.classList.remove('is-scrolled');
+      };
+      onScroll();
+      window.addEventListener('scroll', onScroll, { passive: true });
+    }
+
+    // Mobile sheet with focus trap.
+    const toggle = document.getElementById('nav-toggle');
+    const sheet  = document.getElementById('nav-sheet');
+    const close  = document.getElementById('nav-close');
+
+    // Reset state on (re-)init so a stale "is-open" from before a
+    // page swap doesn't strand the page in the open state.
+    if (sheet) {
+      sheet.classList.remove('is-open');
+      sheet.setAttribute('aria-hidden', 'true');
+    }
+    if (toggle) toggle.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
-    lastFocused?.focus();
+
+    function openSheet() {
+      if (!sheet || !toggle) return;
+      lastFocused = document.activeElement as HTMLElement | null;
+      sheet.classList.add('is-open');
+      sheet.setAttribute('aria-hidden', 'false');
+      toggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+      const first = getFocusables(sheet)[0];
+      first?.focus();
+    }
+    function closeSheet() {
+      if (!sheet || !toggle) return;
+      sheet.classList.remove('is-open');
+      sheet.setAttribute('aria-hidden', 'true');
+      toggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+      lastFocused?.focus();
+    }
+
+    if (toggle && toggle.dataset.navToggleReady !== '1') {
+      toggle.dataset.navToggleReady = '1';
+      toggle.addEventListener('click', openSheet);
+    }
+    if (close && close.dataset.navCloseReady !== '1') {
+      close.dataset.navCloseReady = '1';
+      close.addEventListener('click', closeSheet);
+    }
+
+    if (!escListenerInstalled) {
+      escListenerInstalled = true;
+      document.addEventListener('keydown', (e: KeyboardEvent) => {
+        const liveSheet = document.getElementById('nav-sheet');
+        if (!liveSheet?.classList.contains('is-open')) return;
+        if (e.key === 'Escape') {
+          e.preventDefault();
+          const liveClose = document.getElementById('nav-close');
+          (liveClose as HTMLButtonElement | null)?.click();
+          return;
+        }
+        if (e.key === 'Tab') {
+          const f = getFocusables(liveSheet);
+          if (f.length === 0) return;
+          const first = f[0];
+          const last  = f[f.length - 1];
+          if (e.shiftKey && document.activeElement === first) {
+            e.preventDefault(); last.focus();
+          } else if (!e.shiftKey && document.activeElement === last) {
+            e.preventDefault(); first.focus();
+          }
+        }
+      });
+    }
   }
 
-  toggle?.addEventListener('click', openSheet);
-  close?.addEventListener('click', closeSheet);
-
-  document.addEventListener('keydown', (e: KeyboardEvent) => {
-    if (!sheet?.classList.contains('is-open')) return;
-    if (e.key === 'Escape') {
-      e.preventDefault();
-      closeSheet();
-      return;
-    }
-    if (e.key === 'Tab') {
-      const f = getFocusables(sheet);
-      if (f.length === 0) return;
-      const first = f[0];
-      const last  = f[f.length - 1];
-      if (e.shiftKey && document.activeElement === first) {
-        e.preventDefault(); last.focus();
-      } else if (!e.shiftKey && document.activeElement === last) {
-        e.preventDefault(); first.focus();
-      }
-    }
-  });
+  initNav();
+  document.addEventListener('astro:page-load', initNav);
 </script>
