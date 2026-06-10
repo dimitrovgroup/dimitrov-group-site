@@ -7,6 +7,23 @@
 # - members:     list of member slugs from /src/content/members/
 # - seniorAuthor: true if a group member is the senior (last) author
 
+- id: "adolf-2026-tka-air-travel"
+  title: "Does Preoperative Air Travel Increase Infection Risk After Total Knee Arthroplasty? A Propensity-Matched Analysis"
+  authors:
+    - "Hoveidaei AH"
+    - "Pirahesh K"
+    - "Alnasser AA"
+    - "Suresh SJ"
+    - "Adolf J"
+    - "Bingham JS"
+    - "Conway JD"
+  journal: "The Journal of arthroplasty"
+  year: 2026
+  pmid: "42242569"
+  doi: "10.1016/j.arth.2026.05.070"
+  members:
+    - "j-adolf"
+  seniorAuthor: false
 - id: "adolf-2026-tha-obesity-navigation"
   title: "Rising adoption of imageless navigation in total hip arthroplasty for morbid obesity: do clinical outcomes improve? A matched cohort study"
   authors:
@@ -251,6 +268,18 @@
     - "n-dimitrov"
   seniorAuthor: false
 
+- id: "adolf-2023-publishing-key-steps"
+  title: "Ten key steps: How to successfully publish?"
+  authors:
+    - "Citak M"
+    - "Adolf J"
+  journal: "Joint diseases and related surgery"
+  year: 2023
+  pmid: "37750256"
+  doi: "10.52312/jdrs.2023.1296"
+  members:
+    - "j-adolf"
+  seniorAuthor: false
 - id: "dimitrov-2023-elbow-ecrb-resection"
   title: "Arthroscopic Extensor Carpi Radialis Brevis Muscle Resection for Chronic Elbow Lateral Epicondylitis"
   authors:
