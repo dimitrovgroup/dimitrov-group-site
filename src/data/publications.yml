@@ -7,6 +7,19 @@
 # - members:     list of member slugs from /src/content/members/
 # - seniorAuthor: true if a group member is the senior (last) author
 
+- id: "tenev-2026-kienbock-classification"
+  title: "Kienböck Disease Classification From Lichtman to Contemporary Approaches"
+  authors:
+    - "Tenev D"
+    - "Dimitrov N"
+  journal: "The Journal of the Bulgarian Orthopaedics and Trauma Association"
+  year: 2026
+  pubdate: "2026-06-07"
+  doi: "10.58542/jbota.v63i1.223"
+  members:
+    - "d-tenev"
+    - "n-dimitrov"
+  seniorAuthor: true
 - id: "adolf-2026-tka-air-travel"
   title: "Does Preoperative Air Travel Increase Infection Risk After Total Knee Arthroplasty? A Propensity-Matched Analysis"
   authors:
